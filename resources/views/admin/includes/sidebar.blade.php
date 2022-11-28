@@ -50,6 +50,10 @@
                 </li>
                 <li> <a href="{{route('admin.counters.index')}}"><i class="bx bx-right-arrow-alt"></i>Counters</a>
                 </li>
+                <li> <a href="{{route('admin.corporates.index')}}"><i class="bx bx-right-arrow-alt"></i>Corporates</a>
+                </li>
+                <li> <a href="{{route('admin.financial.index')}}"><i class="bx bx-right-arrow-alt"></i>Financials</a>
+                </li>
             </ul>
         </li>
         <li>

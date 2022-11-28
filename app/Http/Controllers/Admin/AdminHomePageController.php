@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\CorporatePartners;
+use App\Models\FinancialPartners;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -526,6 +528,190 @@ class AdminHomePageController extends Controller
     public function countersDelete($id)
     {
         Counter::findOrfail($id)->delete();
+        return redirect()->back();
+    }
+
+    // Corporate partner method 
+
+    /**
+     * It returns the view of the corporates index page.
+     * 
+     * @return A view called admin.corporates.index with the variable 
+     */
+    public function corporatesIndex()
+    {
+        $corporates = CorporatePartners::latest()->get();
+        return view('admin.corporates.index',compact('corporates'));
+    }
+
+    /**
+     * > This function returns the view `admin.corporates.create`
+     * 
+     * @return A view called 'admin.corporates.create'
+     */
+    public function corporatesCreate()
+    {
+        return view('admin.corporates.create');
+    }
+
+    public function corporatesStore(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required|string',
+            'corporate_logo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+
+        $clogo = new CorporatePartners();
+        $clogo->user_id = Auth()->user()->id;
+        $clogo->name = $request->name;
+        $corporate_logo = $request->file('corporate_logo');
+        if (isset($corporate_logo)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $currentDate.uniqid().'.'.$corporate_logo->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('frontend/assets/img/corporates')) {
+                Storage::disk('public')->makeDirectory('frontend/assets/img/corporates');
+            }
+            // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
+            Storage::disk('public')->putFileAs('frontend/assets/img/corporates/',$corporate_logo,$imagename);
+            $clogo->corporate_logo = $imagename;
+        }
+
+        $clogo->save();
+        return redirect()->route('admin.corporates.index');
+    }
+
+    public function corporatesEdit($id)
+    {
+        $corporate = CorporatePartners::findOrFail($id);
+        return view('admin.corporates.edit',compact('corporate'));
+    }
+
+    public function corporatesUpdate(Request $request,$id)
+    {
+
+        $clogo = CorporatePartners::findOrfail($id);
+        $old_image = $clogo->corporate_logo;
+        $clogo->user_id = Auth()->user()->id;
+        $clogo->name = $request->name;
+        $corporate_logo = $request->file('corporate_logo');
+        if (isset($corporate_logo)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $currentDate.uniqid().'.'.$corporate_logo->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('frontend/assets/img/corporates')) {
+                Storage::disk('public')->makeDirectory('frontend/assets/img/corporates');
+            }
+
+            if (Storage::disk('public')->exists('frontend/assets/img/corporates/'.$old_image)) {
+                Storage::disk('public')->delete('frontend/assets/img/corporates/'.$old_image);
+            }
+            // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
+            Storage::disk('public')->putFileAs('frontend/assets/img/corporates/',$corporate_logo,$imagename);
+            $clogo->corporate_logo = $imagename;
+        }
+
+        $clogo->update();
+        return redirect()->route('admin.corporates.index');
+    }
+
+    public function corporatesDelete($id)
+    {
+        $corporate = CorporatePartners::findOrfail($id);
+        $old_image = $corporate->corporate_logo;
+        if (Storage::disk('public')->exists('frontend/assets/img/corporates/'.$old_image)) {
+            Storage::disk('public')->delete('frontend/assets/img/corporates/'.$old_image);
+        }
+        $corporate->delete();
+        return redirect()->back();
+    }
+
+    // Financial Logo method
+    public function financialIndex()
+    {
+        $financials = FinancialPartners::latest()->get();
+        return view('admin.financials.index',compact('financials'));
+    }
+
+    /**
+     * > This function returns the view `admin.corporates.create`
+     * 
+     * @return A view called 'admin.corporates.create'
+     */
+    public function financialCreate()
+    {
+        return view('admin.financials.create');
+    }
+
+    public function financialStore(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required|string',
+            'financial_logo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+
+        $flogo = new FinancialPartners();
+        $flogo->user_id = Auth()->user()->id;
+        $flogo->name = $request->name;
+        $financial_logo = $request->file('financial_logo');
+        if (isset($financial_logo)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $currentDate.uniqid().'.'.$financial_logo->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('frontend/assets/img/financials')) {
+                Storage::disk('public')->makeDirectory('frontend/assets/img/financials');
+            }
+            // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
+            Storage::disk('public')->putFileAs('frontend/assets/img/financials/',$financial_logo,$imagename);
+            $flogo->financial_logo = $imagename;
+        }
+
+        $flogo->save();
+        return redirect()->route('admin.financial.index');
+    }
+
+    public function financialEdit($id)
+    {
+        $financial = FinancialPartners::findOrFail($id);
+        return view('admin.financials.edit',compact('financial'));
+    }
+
+    public function financialUpdate(Request $request,$id)
+    {
+
+        $flogo = FinancialPartners::findOrfail($id);
+        $old_image = $flogo->financial_logo;
+        $flogo->user_id = Auth()->user()->id;
+        $flogo->name = $request->name;
+        $financial_logo = $request->file('financial_logo');
+        if (isset($financial_logo)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $currentDate.uniqid().'.'.$financial_logo->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('frontend/assets/img/financials')) {
+                Storage::disk('public')->makeDirectory('frontend/assets/img/financials');
+            }
+
+            if (Storage::disk('public')->exists('frontend/assets/img/financials/'.$old_image)) {
+                Storage::disk('public')->delete('frontend/assets/img/financials/'.$old_image);
+            }
+            // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
+            Storage::disk('public')->putFileAs('frontend/assets/img/financials/',$financial_logo,$imagename);
+            $flogo->financial_logo = $imagename;
+        }
+
+        $flogo->update();
+        return redirect()->route('admin.financial.index');
+    }
+
+    public function financialDelete($id)
+    {
+        $financial = FinancialPartners::findOrfail($id);
+        $old_image = $financial->financial_logo;
+        if (Storage::disk('public')->exists('frontend/assets/img/financials/'.$old_image)) {
+            Storage::disk('public')->delete('frontend/assets/img/financials/'.$old_image);
+        }
+        $financial->delete();
         return redirect()->back();
     }
 }

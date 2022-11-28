@@ -250,6 +250,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','is
     Route::get('/counters/{id}/edit',[AdminHomePageController::class, 'countersEdit'])->name('counters.edit'); 
     Route::put('/counters/{id}/update',[AdminHomePageController::class,'countersUpdate'])->name('counters.update');
     Route::delete('/counters/{id}/delete', [AdminHomePageController::class,'countersDelete'])->name('counters.delete'); 
+    
+    // Corporate Partners Route
+    Route::get('/corporates', [AdminHomePageController::class,'corporatesIndex'])->name('corporates.index');
+    Route::get('/corporates/create', [AdminHomePageController::class,'corporatesCreate'])->name('corporates.create');
+    Route::post('/corporates',[AdminHomePageController::class, 'corporatesStore'])->name('corporates.store');
+    Route::get('/corporates/{id}/edit',[AdminHomePageController::class, 'corporatesEdit'])->name('corporates.edit'); 
+    Route::put('/corporates/{id}/update',[AdminHomePageController::class,'corporatesUpdate'])->name('corporates.update');
+    Route::delete('/corporates/{id}/delete', [AdminHomePageController::class,'corporatesDelete'])->name('corporates.delete'); 
+    
+    // Corporate Partners Route
+    Route::get('/financial', [AdminHomePageController::class,'financialIndex'])->name('financial.index');
+    Route::get('/financial/create', [AdminHomePageController::class,'financialCreate'])->name('financial.create');
+    Route::post('/financial',[AdminHomePageController::class, 'financialStore'])->name('financial.store');
+    Route::get('/financial/{id}/edit',[AdminHomePageController::class, 'financialEdit'])->name('financial.edit'); 
+    Route::put('/financial/{id}/update',[AdminHomePageController::class,'financialUpdate'])->name('financial.update');
+    Route::delete('/financial/{id}/delete', [AdminHomePageController::class,'financialDelete'])->name('financial.delete'); 
 });
 
 Route::group(['prefix' => 'editor', 'as' => 'editor.'], function ()

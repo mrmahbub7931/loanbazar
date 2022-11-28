@@ -213,15 +213,17 @@
     <!-- /.container -->
 </section>
 <!-- /section -->
-
+@php
+    $counter = \App\Models\Counter::latest()->first();
+@endphp
+@if($counter)
 <section class="wrapper image-wrapper bg-auto no-overlay bg-image text-center bg-map"
     data-image-src="{{ asset('frontend/assets/img/map.png') }}">
     <div class="container py-10 pt-md-12 pb-md-12">
         <div class="row pt-md-12">
             <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto">
                 <h2 class="fs-15 text-uppercase text-muted mb-3">Join Our Community</h2>
-                <h3 class="display-4 mb-8 px-lg-12" data-cues="fadeIn">We have helped 25,510 Bangladeshis find the right products for their
-                    needs</h3>
+                <h3 class="display-4 mb-8 px-lg-12" data-cues="fadeIn">{{$counter->title}}</h3>
             </div>
             <!-- /.row -->
         </div>
@@ -229,10 +231,8 @@
         <div class="row pb-md-12">
             <div class="col-md-12 col-lg-12 col-xl-12 mx-auto">
                 <div class="row align-items-center counter-wrapper gy-4 gy-md-0">
+                        
                     <div class="col-md-4 text-center" data-cues="slideInLeft" data-delay="200">
-                        @php
-                            $counter = \App\Models\Counter::latest()->first();
-                        @endphp
                         <div class="card shadow-lg">
                             <div class="card-body">
                                 <div class="d-flex d-lg-block d-xl-flex flex-row">
@@ -289,6 +289,7 @@
                         </div>
                     </div>
                     <!--/column -->
+                    
                 </div>
                 <!--/.row -->
             </div>
@@ -298,8 +299,12 @@
     </div>
     <!-- /.container -->
 </section>
+@endif
 <!-- /section counter -->
-
+@php
+    $cpartners = \App\Models\CorporatePartners::latest()->get();
+    $fpartners = \App\Models\FinancialPartners::latest()->get();
+@endphp
 <section class="separator bg-soft-leaf pb-12">
     <div class="container">
         <div class="row text-center">
@@ -312,98 +317,40 @@
         </div>
         <div class="row text-center" data-cues="zoomIn" data-delay="100">
             <div class="col-12">
+                @isset($cpartners)
                 <div id="partners__flex" class="owl-carousel">
+                   
+                    @foreach (\App\Models\CorporatePartners::latest()->get() as $corprate)
                     <div class="item">
                         <div class="card shadow-lg h-100 align-items-center">
                             <div class="card-body align-items-center d-flex px-3 py-6">
-                                <figure class="px-md-3 mb-0"><img src="{{ asset('frontend/assets/img/brands/1.png') }}" alt="">
+                                <figure class="px-md-3 mb-0"><img src="{{ Storage::disk('public')->url('frontend/assets/img/corporates/'.$corprate->corporate_logo) }}" alt="">
                                 </figure>
                             </div>
                             <!--/.card-body -->
                         </div>
                         <!--/.card -->
                     </div>
-                    <div class="item">
-                        <div class="card shadow-lg h-100 align-items-center">
-                            <div class="card-body align-items-center d-flex px-3 py-6">
-                                <figure class="px-md-3 mb-0"><img src="{{ asset('frontend/assets/img/brands/2.png') }}" alt="">
-                                </figure>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!--/.card -->
-                    </div>
-                    <div class="item">
-                        <div class="card shadow-lg h-100 align-items-center">
-                            <div class="card-body align-items-center d-flex px-3 py-6">
-                                <figure class="px-md-3 mb-0"><img src="{{ asset('frontend/assets/img/brands/3.png') }}" alt="">
-                                </figure>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!--/.card -->
-                    </div>
-                    <div class="item">
-                        <div class="card shadow-lg h-100 align-items-center">
-                            <div class="card-body align-items-center d-flex px-3 py-6">
-                                <figure class="px-md-3 mb-0"><img src="{{ asset('frontend/assets/img/brands/4.png') }}" alt="">
-                                </figure>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!--/.card -->
-                    </div>
-                    <div class="item">
-                        <div class="card shadow-lg h-100 align-items-center">
-                            <div class="card-body align-items-center d-flex px-3 py-6">
-                                <figure class="px-md-3 mb-0"><img src="{{ asset('frontend/assets/img/brands/5.png') }}" alt="">
-                                </figure>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!--/.card -->
-                    </div>
-                    
-                    <div class="item">
-                        <div class="card shadow-lg h-100 align-items-center">
-                            <div class="card-body align-items-center d-flex px-3 py-6">
-                                <figure class="px-md-3 mb-0"><img src="{{ asset('frontend/assets/img/brands/6.png') }}" alt="">
-                                </figure>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!--/.card -->
-                    </div>
-
+                    @endforeach
                 </div>
+                @endisset
             </div>
             
         </div>
         <div class="row text-center justify-content-center align-items-center mt-4" data-cues="zoomIn" data-group="images">
             <h2 class="fs-21 text-uppercase text-black text-center mb-12 mt-15">Helping you choose from our trusted
                 financial partners</h2>
+            @isset($fpartners)
             <div class="carousel owl-carousel clients" data-margin="30" data-loop="true" data-dots="false"
                 data-autoplay="true" data-autoplay-timeout="3000"
                 data-responsive='{"0":{"items": "2"}, "768":{"items": "4"}, "992":{"items": "5"}, "1200":{"items": "6"}, "1400":{"items": "7"}}'>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/1.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/2.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/3.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/4.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/5.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/6.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/7.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/8.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/9.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/10.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/11.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/12.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/13.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/14.jpg') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/15.png') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/16.png') }}" alt="" /></div>
-                <div class="item px-5"><img src="{{ asset('frontend/assets/img/brands/financial/17.png') }}" alt="" /></div>
+                @foreach ($fpartners as $financial)
+                    <div class="item px-5"><img src="{{ Storage::disk('public')->url('frontend/assets/img/financials/'.$financial->financial_logo) }}" alt="" /></div>
+                @endforeach
+
             </div>
             <!-- /.owl-carousel -->
+            @endisset
         </div>
     </div>
 </section>

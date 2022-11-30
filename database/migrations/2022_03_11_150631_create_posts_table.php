@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('writer_id');
             $table->string('title')->nullable();
             $table->string('slug',255)->unique();
-            $table->text('body')->nullable();
+            $table->longtext('body')->nullable();
             $table->boolean('status')->default(0);
             $table->boolean('is_approved')->default(0);
             $table->string('featured_img')->nullable();

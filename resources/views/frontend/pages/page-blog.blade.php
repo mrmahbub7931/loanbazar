@@ -24,11 +24,11 @@
         <div class="col-lg-10 mx-auto">
           <div class="blog grid grid-view mt-8">
             <div class="row isotope gx-md-8 gy-8 mb-8">
-            @if (count($posts) < 1)
+            @if (count($posts) > 0)
                 
             
             @foreach ($posts as $post)
-              <article class="item post col-md-6">
+              <article class="item post col-md-4">
                 <div class="card">
                   <figure class="card-img-top overlay overlay1 hover-scale"><a href="{{ route('post.url',$post->slug) }}"> <img src="{{ Storage::disk('public')->url('frontend/assets/img/blog/featured/'.$post->featured_img) }}" alt="" /></a>
                     <figcaption>
@@ -43,7 +43,7 @@
                     </div>
                     @endforeach
                     <!-- /.post-category -->
-                      <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark" href="{{ route('post.url',$post->slug) }}">{{ $post->title }}</a></h2>
+                      <h3 class="post-title h3 mt-1 mb-3"><a class="link-dark" href="{{ route('post.url',$post->slug) }}">{{ $post->title }}</a></h3>
                     </div>
                     <!-- /.post-header -->
                     {{-- <div class="post-content">

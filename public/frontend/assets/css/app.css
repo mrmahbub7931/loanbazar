@@ -991,6 +991,9 @@ figure.overlay a {
     padding: 0 0.4rem 0 0;
     margin: 0.4rem 0 0 0;
 }
+.classic-view img {
+    border-radius: 0.4rem;
+}
 /* responsive css */
 @media screen and (min-width:1367px){
     .lb__header .nav-link, .navbar .nav-link {

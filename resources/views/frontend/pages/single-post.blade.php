@@ -46,7 +46,23 @@
                       <!-- /.post -->
                     </div>
                     <!-- /.classic-view -->
-                    
+                    <hr />
+                    <div class="author-info d-md-flex align-items-center mb-3">
+                      <div class="d-flex align-items-center">
+                        <figure class="user-avatar"><img class="rounded-circle" alt="" src="{{Storage::disk('public')->url('frontend/assets/img/writers/'.$post->writer->writer_image)}}" /></figure>
+                        <div>
+                          <h6><a href="#" class="link-dark">{{$post->writer->writer_name}}</a></h6>
+                          <span class="post-meta fs-15">Writer</span>
+                        </div>
+                      </div>
+                      {{-- <div class="mt-3 mt-md-0 ms-auto">
+                        <a href="#" class="btn btn-sm btn-soft-ash rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-file-alt"></i> All Posts</a>
+                      </div> --}}
+                    </div>
+                    <!-- /.author-info -->
+                    @isset($post->writer->writer_bio)
+                    <p>{!! $post->writer->writer_bio !!}</p>
+                    @endisset
                     <hr />
                     <h3 class="mb-6">You Might Also Like</h3>
                     <div class="carousel owl-carousel blog grid-view mb-16" data-margin="30" data-dots="true" data-autoplay="false" data-autoplay-timeout="5000" data-responsive='{"0":{"items": "1"}, "768":{"items": "2"}, "992":{"items": "2"}, "1200":{"items": "2"}}'>
@@ -88,6 +104,30 @@
                       @endforeach
                     </div>
                     <!-- /.owl-carousel -->
+                    <hr />
+                    <h3 class="mb-3">Would you like to share your thoughts?</h3>
+                    {{-- <p class="mb-7">Your email address will not be published. Required fields are marked *</p> --}}
+                    <form class="comment-form" action="" method="POST">
+                      @csrf
+                      <div class="form-label-group mb-4">
+                        <input type="text" class="form-control" placeholder="Name*" id="c-name">
+                        <label for="c-name">Name *</label>
+                      </div>
+                      {{-- <div class="form-label-group mb-4">
+                        <input type="email" class="form-control" placeholder="Email*" id="c-email">
+                        <label for="c-email">Email*</label>
+                      </div>
+                      <div class="form-label-group mb-4">
+                        <input type="text" class="form-control" placeholder="Website" id="c-web">
+                        <label for="c-web">Website</label>
+                      </div> --}}
+                      <div class="form-label-group mb-4">
+                        <textarea name="textarea" class="form-control" rows="5" placeholder="Comment"></textarea>
+                        <label>Comment *</label>
+                      </div>
+                      <button type="submit" class="btn btn-sm btn__red rounded-pill">Submit</button>
+                    </form>
+                    <!-- /.comment-form -->
                   </div>
                   <!-- /.card-body -->
                 </div>

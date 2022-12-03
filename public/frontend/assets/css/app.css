@@ -986,6 +986,11 @@ figure.overlay img {
 figure.overlay a {
     height: 100%;
 }
+.emergency_contact_image img {
+    width: 32.33% !important;
+    padding: 0 0.4rem 0 0;
+    margin: 0.4rem 0 0 0;
+}
 /* responsive css */
 @media screen and (min-width:1367px){
     .lb__header .nav-link, .navbar .nav-link {
@@ -996,5 +1001,8 @@ figure.overlay a {
     .lb__breadcrumb {
         padding: 15px 10px;
         width: 90%;
+    }
+    .footer__bottom ul {
+        display: none !important;
     }
 }

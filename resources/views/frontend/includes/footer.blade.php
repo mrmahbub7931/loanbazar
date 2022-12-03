@@ -66,6 +66,14 @@
 
                     </div>
                     <!-- /.newsletter-wrapper -->
+                    <div class="emergency_contact_image">
+                        <img src="{{ asset('frontend/assets/img/footer/01.jpg') }}" alt="">
+                        <img src="{{ asset('frontend/assets/img/footer/02.jpg') }}" alt="">
+                        <img src="{{ asset('frontend/assets/img/footer/03.jpg') }}" alt="">
+                        <img src="{{ asset('frontend/assets/img/footer/04.jpg') }}" alt="">
+                        <img src="{{ asset('frontend/assets/img/footer/05.jpg') }}" alt="">
+                        <img src="{{ asset('frontend/assets/img/footer/06.jpg') }}" alt="">
+                    </div>
                 </div>
                 <!-- /.widget -->
             </div>
@@ -77,7 +85,10 @@
     <div class="footer__bottom">
         <div class="container">
             <div class="row">
-                <div class="col mr-auto">
+                <div class="col-12 col-md-5">
+                    <small>Copyright© 2022 Loan Bazaar BD Ltd. All rights reserved.</small>
+                </div>
+                <div class="col-12 col-md-7">
                     <ul class="list-unstyled mb-0 d-flex">
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Our Story</a></li>

@@ -105,14 +105,68 @@
                     </div>
                     <!-- /.owl-carousel -->
                     <hr />
+                  <div id="comments">
+                    <h3 class="mb-6">5 Comments</h3>
+                    <ol id="singlecomments" class="commentlist">
+                      <li class="comment">
+                        <div class="comment-header d-md-flex align-items-center">
+                          <div class="d-flex align-items-center">
+                            {{-- <figure class="user-avatar"><img class="rounded-circle" alt="" src="img/avatars/u2.jpg" /></figure> --}}
+                            <div>
+                              <h6 class="comment-author"><a href="#" class="link-dark">Nikolas Brooten</a></h6>
+                              <ul class="post-meta">
+                                <li><i class="uil uil-calendar-alt"></i>21 Feb 2021</li>
+                              </ul>
+                              <!-- /.post-meta -->
+                            </div>
+                            <!-- /div -->
+                          </div>
+                          <!-- /div -->
+                          <div class="mt-3 mt-md-0 ms-auto">
+                            <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                          </div>
+                          <!-- /div -->
+                        </div>
+                        <!-- /.comment-header -->
+                        <p>Quisque tristique tincidunt metus non aliquam. Quisque ac risus sit amet quam sollicitudin vestibulum vitae malesuada libero. Mauris magna elit, suscipit non ornare et, blandit a tellus. Pellentesque dignissim ornare faucibus mollis.</p>
+                        <ul class="children">
+                          <li class="comment">
+                            <div class="comment-header d-md-flex align-items-center">
+                              <div class="d-flex align-items-center">
+                                {{-- <figure class="user-avatar"><img class="rounded-circle" alt="" src="img/avatars/u3.jpg" /></figure> --}}
+                                <div>
+                                  <h6 class="comment-author"><a href="#" class="link-dark">Pearce Frye</a></h6>
+                                  <ul class="post-meta">
+                                    <li><i class="uil uil-calendar-alt"></i>22 Feb 2021</li>
+                                  </ul>
+                                  <!-- /.post-meta -->
+                                </div>
+                                <!-- /div -->
+                              </div>
+                              <!-- /div -->
+                              {{-- <div class="mt-3 mt-md-0 ms-auto">
+                                <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                              </div> --}}
+                              <!-- /div -->
+                            </div>
+                            <!-- /.comment-header -->
+                            <p>Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis.</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ol>
+                  </div>
+                  <!-- /#comments -->
+                    <hr />
                     <h3 class="mb-3">Would you like to share your thoughts?</h3>
                     {{-- <p class="mb-7">Your email address will not be published. Required fields are marked *</p> --}}
+                    @auth
                     <form class="comment-form" action="" method="POST">
                       @csrf
-                      <div class="form-label-group mb-4">
+                      {{-- <div class="form-label-group mb-4">
                         <input type="text" class="form-control" placeholder="Name*" id="c-name">
                         <label for="c-name">Name *</label>
-                      </div>
+                      </div> --}}
                       {{-- <div class="form-label-group mb-4">
                         <input type="email" class="form-control" placeholder="Email*" id="c-email">
                         <label for="c-email">Email*</label>
@@ -127,7 +181,12 @@
                       </div>
                       <button type="submit" class="btn btn-sm btn__red rounded-pill">Submit</button>
                     </form>
+                    @endauth
                     <!-- /.comment-form -->
+                    @guest
+                        First you need to <a href="#" data-bs-toggle="modal"
+                        data-bs-target="#modal-01">login</a> from here then write your comment
+                    @endguest
                   </div>
                   <!-- /.card-body -->
                 </div>

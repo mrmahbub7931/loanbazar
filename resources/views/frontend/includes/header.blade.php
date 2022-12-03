@@ -223,13 +223,13 @@
             aria-label="Close"></button>
         <a href="start.html"><img src="img/logo-light.png" srcset="img/logo-light@2x.png 2x" alt="" /></a>
         <div class="mt-4 widget">
-            <p>Loanbazar Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quaerat.</p>
+            <p>Loan Bazaar BD is a financial aggregator that helps customers compare multiple retail banking products, Insurance and apply online in minutes.</p>
         </div>
         <!-- /.widget -->
         <div class="widget">
             <h4 class="widget-title text-white mb-3">Contact Info</h4>
-            <address> Moonshine St. 14/05 <br /> Light City, London </address>
-            <a href="mailto:first.last@email.com">info@email.com</a><br /> +00 (123) 456 78 90
+            <address> Bridge Momtaz Height, Mirpur Main Road,<br> Shyamoli Square, Dhaka-1207 </address>
+            <a href="mailto:first.last@email.com">info@loanbazaarbd.com</a><br /> +880 1400 022 999
         </div>
         <!-- /.widget -->
         <div class="widget">

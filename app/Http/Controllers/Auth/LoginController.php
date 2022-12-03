@@ -59,8 +59,8 @@ class LoginController extends Controller
             if (Auth()->user()->role == 1) {
                 return redirect()->route('admin.dashboard');
             }elseif(Auth()->user()->role == 2){
-                return "hi";
-                return redirect()->route('front.home');
+                // return redirect()->route('front.home');
+                return redirect()->back();
             }
         }else{
             return redirect()->route('login')->with('error','Credentials are wrong!');

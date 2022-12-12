@@ -994,6 +994,17 @@ figure.overlay a {
 .classic-view img {
     border-radius: 0.4rem;
 }
+.widget_block {
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+.widget_block i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    color: #ed1e2e;
+}
 /* responsive css */
 @media screen and (min-width:1367px){
     .lb__header .nav-link, .navbar .nav-link {

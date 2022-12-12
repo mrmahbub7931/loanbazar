@@ -17,15 +17,33 @@
 </div>
 @include('frontend.includes.model')
 <footer class="bg-dark text-inverse lb__footer">
-    <div class="container pt-10 py-6 py-md-15">
+    <div class="container pt-10 py-6 py-md-10">
         <div class="row gy-6 gy-lg-0">
             <div class="col-md-4 col-lg-4">
                 <div class="widget">
                     <img class="mb-4" src="{{ asset('frontend/assets/img/logo-white.png') }}"
                         srcset="{{ asset('frontend/assets/img/logo-white.png') }}" alt="" />
-                    <address class="pe-xl-15 pe-xxl-17">Bridge Momtaz Height, Mirpur Main Road, Shyamoli Square,
-                        Dhaka-1207</address>
-                    <a href="mailto:#">info@loanbazaarbd.com</a><br /> +880 1400 022 999
+                    <div class="widget_block">
+                        <div class="icon">
+                            <i class="uil uil-location-pin-alt"></i>
+                        </div>
+                        <address class="pe-xl-15 pe-xxl-17">
+                            Bridge Momtaz Height, Mirpur Main Road, Shyamoli Square,
+                            Dhaka-1207
+                        </address>
+                    </div>
+                    <div class="widget_block">
+                        <div class="icon">
+                            <i class="uil uil-envelope-alt"></i>
+                        </div>
+                        <a href="mailto:info@loanbazaarbd.com">info@loanbazaarbd.com</a>
+                    </div>
+                    <div class="widget_block">
+                        <div class="icon">
+                            <i class="uil uil-incoming-call"></i>
+                        </div>
+                        <p>+880 1400 022 999</p>
+                    </div>
                     <nav class="nav social social-white">
                         <a href="https://www.facebook.com/bdloanbazaar"><i class="uil uil-facebook-f"></i></a>
                         <a href="#"><i class="uil uil-twitter"></i></a>
@@ -80,6 +98,13 @@
             <!-- /column -->
         </div>
         <!--/.row -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="payment_gateway_option">
+                    <img src="{{ asset('frontend/assets/img/ssl_payments.png') }}" alt="">
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.container -->
     <div class="footer__bottom">

@@ -150,9 +150,11 @@
         </div> --}}
     </div>
     <div class="desktop__large_img">
-        @foreach (\App\Models\HomeImage::latest()->get() as $image)
-            <img src="{{ Storage::disk('public')->url('frontend/assets/img/homeimg/'.$image->image) }}" alt="">
-        @endforeach
+        @if (\App\Models\HomeImage::latest()->get())
+            @foreach (\App\Models\HomeImage::latest()->get() as $image)
+                <img src="{{ Storage::disk('public')->url('frontend/assets/img/homeimg/'.$image->image) }}" alt="">
+            @endforeach
+        @endif
     </div>
     <div class="mobile__sm_img">
         <img src="" alt="">

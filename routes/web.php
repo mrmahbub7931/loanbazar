@@ -259,7 +259,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','is
     Route::put('/corporates/{id}/update',[AdminHomePageController::class,'corporatesUpdate'])->name('corporates.update');
     Route::delete('/corporates/{id}/delete', [AdminHomePageController::class,'corporatesDelete'])->name('corporates.delete'); 
     
-    // Corporate Partners Route
+    // financial Partners Route
     Route::get('/financial', [AdminHomePageController::class,'financialIndex'])->name('financial.index');
     Route::get('/financial/create', [AdminHomePageController::class,'financialCreate'])->name('financial.create');
     Route::post('/financial',[AdminHomePageController::class, 'financialStore'])->name('financial.store');

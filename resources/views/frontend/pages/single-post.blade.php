@@ -161,7 +161,7 @@
                     <h3 class="mb-3">Would you like to share your thoughts?</h3>
                     {{-- <p class="mb-7">Your email address will not be published. Required fields are marked *</p> --}}
                     @auth
-                    <form class="comment-form" action="" method="POST">
+                    <form class="comment-form" action="{{ route('comment.store') }}" method="POST">
                       @csrf
                       {{-- <div class="form-label-group mb-4">
                         <input type="text" class="form-control" placeholder="Name*" id="c-name">
@@ -176,7 +176,7 @@
                         <label for="c-web">Website</label>
                       </div> --}}
                       <div class="form-label-group mb-4">
-                        <textarea name="textarea" class="form-control" rows="5" placeholder="Comment"></textarea>
+                        <textarea name="body" class="form-control" rows="5" placeholder="Comment"></textarea>
                         <label>Comment *</label>
                       </div>
                       <button type="submit" class="btn btn-sm btn__red rounded-pill">Submit</button>

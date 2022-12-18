@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminHomePageController;
 use App\Http\Controllers\Admin\AdminCardServiceController;
 use App\Http\Controllers\Admin\AdminLoanserviceController;
 use App\Http\Controllers\Admin\AdminExchangeRateController;
+use App\Http\Controllers\Front\CommentController;
 
 // use App\Http\Controllers\Admin\CardServiceController;
 
@@ -53,7 +54,7 @@ Route::get('/compare',[PagesController::class, 'serviceCompare'])->name('service
 Route::get('{page}',[PagesController::class, 'showPage'])->name('pages.url');
 Route::get('career/{slug}',[PagesController::class, 'showDetailsCircular'])->name('circular.url');
 Route::get('/blog/{url}',[PagesController::class, 'singlePost'])->name('post.url');
-
+Route::post('/comments',[CommentController::class,'commentStore'])->name('comment.store');
 
 
 

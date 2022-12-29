@@ -116,15 +116,38 @@ class PagesController extends Controller
         }
     }
 
+    /**
+     * It takes the slug from the URL and uses it to find the post in the database
+     * 
+     * @param url The URL of the post.
+     */
     public function singlePost($url)
     {
         $post = Post::where('slug',$url)->first();
         return view('frontend.pages.single-post',compact('post'));
     }
 
+    /**
+     * It fetches all the posts from the database and paginates them by 10
+     */
     public function showBlogs()
     {
         $posts = Post::paginate(10);
         return view('frontend.pages.page-blog',compact('posts'));
+    }
+
+    /**
+     * It returns the view `frontend.pages.policy`
+     * 
+     * @return A view
+     */
+    public function showPolicyPage()
+    {
+        return view('frontend.pages.policy');
+    }
+    
+    public function showTermsPage()
+    {
+        return view('frontend.pages.terms');
     }
 }

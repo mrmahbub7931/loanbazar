@@ -118,8 +118,8 @@
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Our Story</a></li>
                         <li><a href="#">Projects</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="{{route('page.terms')}}">Terms of Use</a></li>
+                        <li><a href="{{route('page.policy')}}">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>

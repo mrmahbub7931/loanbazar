@@ -50,11 +50,14 @@ Route::get('/loans/{page}', [PagesController::class, 'showLoan'])->name('loans.p
 Route::get('/insurances/{page}', [PagesController::class, 'showInsurance'])->name('insurances.page.url');
 Route::get('/insurances/{page}/{post}', [PagesController::class, 'showInsurancePost'])->name('insurances.post.url');
 Route::get('/blog',[PagesController::class, 'showBlogs'])->name('blog.page');
+Route::get('/privacy-policy',[PagesController::class,'showPolicyPage'])->name('page.policy');
+Route::get('/terms-condition',[PagesController::class,'showTermsPage'])->name('page.terms');
 Route::get('/compare',[PagesController::class, 'serviceCompare'])->name('service.compare');
 Route::get('{page}',[PagesController::class, 'showPage'])->name('pages.url');
 Route::get('career/{slug}',[PagesController::class, 'showDetailsCircular'])->name('circular.url');
 Route::get('/blog/{url}',[PagesController::class, 'singlePost'])->name('post.url');
 Route::post('/comments',[CommentController::class,'commentStore'])->name('comment.store');
+
 
 
 

@@ -41,7 +41,7 @@
                                 <div class="left-content">
                                     <img src="{{ Storage::disk('public')->url('frontend/assets/img/loans/'.$serviceRow->bank_logo) }}" alt="">
                                     <a href="javascript:;" data-item="{{ $serviceRow->id }}" data-type="loans" class="cmp__btn service__btn__outline">Add Compare</a>
-                                    <a href="javascript:;" class="apl__btn service__btn bg-green">Apply Now</a>
+                                    <a href="{{ route('front.gapply') }}" class="apl__btn service__btn bg-green">Apply Now</a>
                                 </div>
                             </div>
                             <div class="col-md-8 p-0 pl-15 pr-15 bl-dotted br-dotted">

@@ -52,6 +52,8 @@ Route::get('/insurances/{page}/{post}', [PagesController::class, 'showInsuranceP
 Route::get('/blog',[PagesController::class, 'showBlogs'])->name('blog.page');
 Route::get('/privacy-policy',[PagesController::class,'showPolicyPage'])->name('page.policy');
 Route::get('/terms-condition',[PagesController::class,'showTermsPage'])->name('page.terms');
+Route::get('/disclaimer',[PagesController::class,'showDisclaimerPage'])->name('page.disclaimer');
+Route::get('/complaints',[PagesController::class,'showComplaintsPage'])->name('page.complaints');
 Route::get('/compare',[PagesController::class, 'serviceCompare'])->name('service.compare');
 Route::get('{page}',[PagesController::class, 'showPage'])->name('pages.url');
 Route::get('career/{slug}',[PagesController::class, 'showDetailsCircular'])->name('circular.url');

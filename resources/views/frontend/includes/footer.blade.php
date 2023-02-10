@@ -84,6 +84,7 @@
 
                     </div>
                     <!-- /.newsletter-wrapper -->
+                    <h4 class="widget-title text-white mt-2 mb-3">Hotline</h4>
                     <div class="emergency_contact_image">
                         <img src="{{ asset('frontend/assets/img/footer/01.jpg') }}" alt="">
                         <img src="{{ asset('frontend/assets/img/footer/02.jpg') }}" alt="">
@@ -115,11 +116,11 @@
                 </div>
                 <div class="col-12 col-md-7">
                     <ul class="list-unstyled mb-0 d-flex">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="{{route('page.terms')}}">Terms of Use</a></li>
+                        <li><a href="{{ url('/about-loanbazaar-bd') }}">About Us</a></li>
                         <li><a href="{{route('page.policy')}}">Privacy Policy</a></li>
+                        <li><a href="{{route('page.terms')}}">Terms of Use</a></li>
+                        <li><a href="{{ route('page.disclaimer') }}">Disclaimer</a></li>
+                        <li><a href="{{route('page.complaints')}}">Complaints guide</a></li>
                     </ul>
                 </div>
             </div>

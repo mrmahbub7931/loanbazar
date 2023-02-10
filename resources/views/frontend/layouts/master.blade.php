@@ -10,13 +10,26 @@
     {{-- <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/common.css') }}">
-    
+    <link href="{{ asset('frontend/assets/img/loanbazar_ico.png') }}" rel="icon shortcut" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/app.css') }}">
-    <title>Loanbazar | @yield('title') </title>
+    <meta property="og:url"                content="https://loanbazaarbd.com" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="LoanBazaar BD" />
+    <meta property="og:description"        content="Loanbazaarbd.com is an online financial aggregator company in Bangladesh which assists consumers in taking the best financial decision in shortest possible time." />
+    <meta property="og:image"              content="{{ asset('frontend/assets/img/loanbazaar_bd.jpeg') }}" />
+    <title>LoanBazaar | @yield('title') </title>
 
     <!-- ========== Google Fonts ========== -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDE279E5PK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-RDE279E5PK');
+</script>
 </head>
 <body>
     <div id="fb-root"></div>

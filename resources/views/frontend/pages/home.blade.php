@@ -177,7 +177,7 @@
                 style="bottom: 0.5rem; right: -1.7rem;"></div>
             <div class="shape bg-dot primary rellax w-16 h-16" data-rellax-speed="1" style="top: -1rem; left: -1.7rem;">
             </div>
-            <div class="carousel owl-carousel gap-small" data-margin="0" data-dots="true" data-autoplay="false"
+            <div class="carousel owl-carousel gap-small" data-margin="0" data-dots="false" data-nav="true" data-autoplay="true"
                 data-autoplay-timeout="5000"
                 data-responsive='{"0":{"items": "1"}, "768":{"items": "2"}, "992":{"items": "2"}, "1200":{"items": "3"}}'>
                 @foreach (\App\Models\Review::all() as $review)
@@ -313,19 +313,18 @@
             <div class="col">
                 <div class="section__heading">
                   <h1 class="heading">Our Corporate Partners</h1>
-                  <p class="intro-small">Presentinng Banking Plan & Services</p>
                 </div>
             </div>
         </div>
         <div class="row text-center" data-cues="zoomIn" data-delay="100">
             <div class="col-12">
                 @isset($cpartners)
-                <div id="partners__flex" class="owl-carousel">
+                <div id="partners__flex">
                    
                     @foreach (\App\Models\CorporatePartners::latest()->get() as $corprate)
                     <div class="item">
-                        <div class="card shadow-lg h-100 align-items-center">
-                            <div class="card-body align-items-center d-flex px-3 py-6">
+                        <div class="card shadow-lg h-100">
+                            <div class="card-body px-3 py-6">
                                 <figure class="px-md-3 mb-0"><img src="{{ Storage::disk('public')->url('frontend/assets/img/corporates/'.$corprate->corporate_logo) }}" alt="">
                                 </figure>
                             </div>
@@ -334,6 +333,12 @@
                         <!--/.card -->
                     </div>
                     @endforeach
+                    {{-- @foreach (\App\Models\CorporatePartners::latest()->get() as $corprate)
+                    <div class="item">
+                        <figure class="px-md-3 mb-0"><img src="{{ Storage::disk('public')->url('frontend/assets/img/corporates/'.$corprate->corporate_logo) }}" alt="">
+                        </figure>
+                    </div>
+                    @endforeach --}}
                 </div>
                 @endisset
             </div>
@@ -367,7 +372,7 @@
                 </div>
             </div>
         </div>
-        <div class="carousel owl-carousel blog grid-view" data-margin="30" data-dots="true" data-autoplay="false"
+        <div class="carousel owl-carousel blog grid-view" data-margin="30" data-dots="false" data-nav="true" data-autoplay="false"
             data-autoplay-timeout="5000"
             data-responsive='{"0":{"items": "1"}, "768":{"items": "2"}, "992":{"items": "2"}, "1200":{"items": "3"}}'>
             @foreach (\App\Models\Post::latest()->get() as $post)

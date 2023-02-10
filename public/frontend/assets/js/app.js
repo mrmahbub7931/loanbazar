@@ -7,33 +7,33 @@
         nav: true,
         navText: ['<i class="uil uil-angle-left fs-50"></i>','<i class="uil uil-angle-right fs-50"></i>']
     });
-    $("#partners__flex").owlCarousel({
-        items: 5,
-        nav: false,
-        margin: 15,
-        loop: true,
-        dots: false,
-        responsive : {
-            // breakpoint from 0 up
-            0 : {
-               items: 1
-            },
-            // breakpoint from 480 up
-            480 : {
-                items: 1
-            },
-            // breakpoint from 768 up
-            768 : {
-                items: 2
-            },
-            992 : {
-                items: 4
-            },
-            1024 : {
-                items: 5
-            }
-        }
-    });
+    // $("#partners__flex").owlCarousel({
+    //     items: 5,
+    //     nav: false,
+    //     margin: 15,
+    //     loop: true,
+    //     dots: false,
+    //     responsive : {
+    //         // breakpoint from 0 up
+    //         0 : {
+    //            items: 1
+    //         },
+    //         // breakpoint from 480 up
+    //         480 : {
+    //             items: 1
+    //         },
+    //         // breakpoint from 768 up
+    //         768 : {
+    //             items: 2
+    //         },
+    //         992 : {
+    //             items: 4
+    //         },
+    //         1024 : {
+    //             items: 5
+    //         }
+    //     }
+    // });
     $("#best__deal__slider").owlCarousel({
         items: 4,
         loop: true,

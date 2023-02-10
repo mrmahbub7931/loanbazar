@@ -139,15 +139,41 @@ class PagesController extends Controller
     /**
      * It returns the view `frontend.pages.policy`
      * 
-     * @return A view
+     * @return view
      */
     public function showPolicyPage()
     {
         return view('frontend.pages.policy');
     }
     
+    /**
+     * It returns a view called `frontend.pages.terms`
+     * 
+     * @return view
+     */
     public function showTermsPage()
     {
         return view('frontend.pages.terms');
+    }
+    
+    /**
+     * It returns a view called `disclaimer` from the `pages` folder in the `frontend` folder in the
+     * `views` folder
+     * 
+     * @return view
+     */
+    public function showDisclaimerPage()
+    {
+        return view('frontend.pages.disclaimer');
+    }
+    
+    /**
+     * It returns the view `frontend.pages.complaints`
+     * 
+     * @return view
+     */
+    public function showComplaintsPage()
+    {
+        return view('frontend.pages.complaints');
     }
 }

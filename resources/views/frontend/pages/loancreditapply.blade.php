@@ -13,9 +13,7 @@
             <div class="col-12">
                 <div class="content">
                     <h1 class="text-white fs-40">Apply Now</h1>
-                    <p class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste deleniti sit
-                        animi adipisci nesciunt corporis error voluptatum, ratione in deserunt. Voluptates delectus
-                        ipsum sunt? Harum omnis cupiditate voluptas atque fugit?</p>
+                    <p class="text-white">Please fill-in the required information, so that our team can get in touch with you</p>
                     <ul class="lb__breadcrumb">
                         <li><a href="#"><i class="uil uil-home"></i> Home</a></li>
                         <li><a href="#">Pages</a></li>

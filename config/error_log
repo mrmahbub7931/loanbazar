@@ -1,0 +1,12 @@
+[17-Nov-2022 19:05:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/loanbaz1/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/loanbaz1/public_html/config/cache.php on line 18
+[10-Feb-2023 09:55:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/loanbaz1/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/loanbaz1/public_html/config/cache.php on line 18
+[10-Feb-2023 10:07:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/loanbaz1/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/loanbaz1/public_html/config/cache.php on line 18

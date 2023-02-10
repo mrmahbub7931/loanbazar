@@ -38,14 +38,14 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#!">Investment</a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item" href="#">Fixed Deposits</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="#">DPS</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="#">Savings Accounts</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="#">Current Accounts</a></li>
-                        </ul>
-                    </li>
+                    <!--<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#!">Investment</a>-->
+                    <!--    <ul class="dropdown-menu">-->
+                    <!--        <li class="nav-item"><a class="dropdown-item" href="#">Fixed Deposits</a></li>-->
+                    <!--        <li class="nav-item"><a class="dropdown-item" href="#">DPS</a></li>-->
+                    <!--        <li class="nav-item"><a class="dropdown-item" href="#">Savings Accounts</a></li>-->
+                    <!--        <li class="nav-item"><a class="dropdown-item" href="#">Current Accounts</a></li>-->
+                    <!--    </ul>-->
+                    <!--</li>-->
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#!">Tools</a>
                         <ul class="dropdown-menu">
                             <li class="nav-item"><a class="dropdown-item" href="{{route('front.tools.emi')}}">EMI & Loan Calculator</a>
@@ -54,8 +54,6 @@
                             <li class="nav-item"><a class="dropdown-item" href="#">Branch Locator</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tracking</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('blog.page') }}">Blog</a></li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#!">About Us</a>
                         <ul class="dropdown-menu">
                             @foreach (\App\Models\Page::all() as $page)
@@ -67,6 +65,8 @@
                             <li class="nav-item"><a class="dropdown-item" href="#">Media</a></li> --}}
                         </ul>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tracking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blog.page') }}">Blog</a></li>
                 </ul>
                 <!-- /.navbar-nav -->
             </div>

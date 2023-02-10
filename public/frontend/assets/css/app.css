@@ -552,7 +552,7 @@ a:hover {
 .quick__details_col ul li:before {
     width: 10px;
     height: 10px;
-    content: "";
+    content: "\e8b0";
     position: absolute;
     border-radius: 50%;
     border: 2px solid #6bbea3;
@@ -560,6 +560,7 @@ a:hover {
     left: 0;
     right: auto;
     margin-top: 8px;
+    font-family: 'UniCons';
 }
 
 .quick__details_col p {
@@ -1005,10 +1006,66 @@ figure.overlay a {
     font-size: 1rem;
     color: #ed1e2e;
 }
+div#partners__flex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+div#partners__flex .item {
+    width: 20%;
+    padding: 15px;
+}
+header .navbar-collapse .navbar-nav > li.nav-item:after {
+    background: #e31926;
+    transition: 0.3s ease-in-out;
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 3px;
+    opacity: 0;
+    left: 0;.quick__details_col ul li:before
+    right: auto;
+    bottom: 0;
+}
+
+header .navbar-other li.nav-item {
+    border-bottom: 0px solid !important;
+}
+
+.navbar-other li {
+    border-bottom: 0px solid !important;
+}
+
+header .navbar-collapse .navbar-nav > li.nav-item {
+    position: relative;
+}
+
+header .navbar-collapse .navbar-nav > li.nav-item:hover:after {
+    opacity: 1;
+    width: 100%;
+}
+
 /* responsive css */
 @media screen and (min-width:1367px){
     .lb__header .nav-link, .navbar .nav-link {
         font-size: 0.9rem !important;
+    }
+    .dropdown-item {
+        font-size: 0.9rem !important;
+    }
+    .owl-carousel .owl-nav button.owl-prev {
+        left: -2.3rem;
+    }
+    .owl-carousel .owl-nav button.owl-next{
+        right: -2.3rem;
+    }
+}
+@media screen and (min-width:992px){
+    .navbar.fixed .navbar-nav>.nav-item>.dropdown-menu, .navbar:not(.transparent) .navbar-nav>.nav-item:not(.language-select)>.dropdown-menu {
+        margin-top: .05rem!important;
     }
 }
 @media screen and (max-width: 767px){

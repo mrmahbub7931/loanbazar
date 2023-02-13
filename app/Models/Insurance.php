@@ -11,8 +11,9 @@ class Insurance extends Model
 
     protected $table = 'insurances';
     
-    protected $fillable = ['title','url','description','header_image','status'];
-
+    // protected $fillable = ['title','url','description','header_image','status'];
+    protected $guarded = ['id'];
+    
     public function getInsurancePosts()
     {
         return $this->hasMany(InsurancePost::class, 'insurance_id');

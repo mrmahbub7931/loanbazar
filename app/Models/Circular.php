@@ -11,5 +11,6 @@ class Circular extends Model
 
     protected $table = 'circulars';
 
-    protected $fillable = ['user_id','job_title','job_location','job_description','status'];
+    // protected $fillable = ['user_id','job_title','job_location','job_description','status'];
+    protected $guarded = ['id'];
 }

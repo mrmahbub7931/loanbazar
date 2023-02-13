@@ -9,7 +9,7 @@ class CardServiceFaq extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['card_service_id','faqs'];
+    protected $guarded = ['id'];
 
     public function getCardService()
     {

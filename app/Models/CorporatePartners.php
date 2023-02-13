@@ -10,5 +10,5 @@ class CorporatePartners extends Model
     use HasFactory;
 
     protected $table = 'corporate_partners';
-    protected $guared = [''];
+    protected $guarded = ['id'];
 }

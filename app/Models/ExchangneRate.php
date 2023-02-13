@@ -10,7 +10,7 @@ class ExchangneRate extends Model
     use HasFactory;
 
     // protected $fillable = ['date','currency','buying','selling'];
-    protected $guarded = [];
+    protected $guarded = ['id'];
     protected $table = 'exchangne_rates';
 
     

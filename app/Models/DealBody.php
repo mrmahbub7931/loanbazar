@@ -10,7 +10,7 @@ class DealBody extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['best_deal_id','body'];
+    protected $guarded = ['id'];
 
     public function getBestDeal()
     {

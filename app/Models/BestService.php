@@ -12,15 +12,7 @@ class BestService extends Model
 
     protected $table = 'best_services';
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'url',
-        'icon_image',
-        'short_desc',
-        'btn_txt',
-        'status'
-    ];
+    protected $guarded = ['id'];
 
     public function getUser()
     {

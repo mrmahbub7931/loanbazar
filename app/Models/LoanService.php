@@ -12,8 +12,9 @@ class LoanService extends Model
     use HasFactory;
 
     protected $table = 'loan_services';
-    protected $fillable = ['user_id', 'service_title', 'title_description', 'disclaimer', 'header_image'];
-
+    // protected $fillable = ['user_id', 'service_title', 'title_description', 'disclaimer', 'header_image'];
+    protected $guarded = ['id'];
+    
     public function getServiceRows()
     {
         return $this->hasMany(LoanServiceRow::class,'loan_service_id');

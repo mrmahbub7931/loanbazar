@@ -10,5 +10,5 @@ class HomeImage extends Model
     use HasFactory;
 
     protected $table = 'home_images';
-    // protected $guarded = ['id'];
+    protected $guarded = ['id'];
 }

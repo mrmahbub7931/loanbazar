@@ -10,7 +10,8 @@ class CardServiceRow extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['card_service_id','card_image','notify_top','ineterest_period','annual_fee','card_processing','free_supplementary_card','withdrawl_limit','fees_charges', 'features', 'eligibility', 'notify_bottom','status'];
+    // protected $fillable = ['card_service_id','card_image','notify_top','ineterest_period','annual_fee','card_processing','free_supplementary_card','withdrawl_limit','fees_charges', 'features', 'eligibility', 'notify_bottom','status'];
+    protected $guarded = ['id'];
 
     public function getCardService()
     {

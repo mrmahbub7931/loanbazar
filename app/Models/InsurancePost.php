@@ -11,8 +11,9 @@ class InsurancePost extends Model
 
     protected $table = 'insurance_posts';
     
-    protected $fillable = ['insurance_id','title','url','description','pdf_file','featured_image','status'];
-
+    // protected $fillable = ['insurance_id','title','url','description','pdf_file','featured_image','status'];
+    protected $guarded = ['id'];
+    
     public function getInsurancePostParent()
     {
         return $this->belongsTo(Insurance::class,'insurance_id');

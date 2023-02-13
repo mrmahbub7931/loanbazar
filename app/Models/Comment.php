@@ -19,13 +19,13 @@ class Comment extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'post_id',
-        'parent_id',
-        'body'
-    ];
-
+    // protected $fillable = [
+    //     'user_id',
+    //     'post_id',
+    //     'parent_id',
+    //     'body'
+    // ];
+    protected $guarded = ['id'];
     /**
      * > The belongs to Relationship
      * 

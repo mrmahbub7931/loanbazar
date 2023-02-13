@@ -12,7 +12,7 @@ class CardService extends Model
 {
     use HasFactory;
     protected $table = 'card_services';
-    protected $fillable = ['user_id', 'service_title', 'title_description', 'disclaimer'];
+    protected $guarded = ['id'];
 
     public function getServiceRows()
     {

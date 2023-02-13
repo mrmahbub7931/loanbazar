@@ -11,5 +11,7 @@ class Slider extends Model
 
     protected $table = 'sliders';
     
-    protected $fillable = ['title', 'description', 'image_src', 'btn_txt', 'btn_url'];
+    // protected $fillable = ['title', 'description', 'image_src', 'btn_txt', 'btn_url'];
+    protected $guarded = ['id'];
+    
 }

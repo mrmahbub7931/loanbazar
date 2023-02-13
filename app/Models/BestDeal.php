@@ -12,14 +12,7 @@ class BestDeal extends Model
 
     protected $table = 'best_deals';
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'img_src',
-        'btn_txt',
-        'btn_url',
-        'status'
-    ];
+    protected $guarded = ['id'];
 
     public function getDealsBody()
     {

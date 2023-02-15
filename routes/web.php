@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Admin\WriterCotroller;
 use App\Http\Controllers\Front\PagesController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Front\FrontendController;
 use App\Http\Controllers\Admin\AdminTeamController;
@@ -21,7 +24,6 @@ use App\Http\Controllers\Admin\AdminHomePageController;
 use App\Http\Controllers\Admin\AdminCardServiceController;
 use App\Http\Controllers\Admin\AdminLoanserviceController;
 use App\Http\Controllers\Admin\AdminExchangeRateController;
-use App\Http\Controllers\Front\CommentController;
 
 // use App\Http\Controllers\Admin\CardServiceController;
 
@@ -272,6 +274,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','is
     Route::get('/financial/{id}/edit',[AdminHomePageController::class, 'financialEdit'])->name('financial.edit'); 
     Route::put('/financial/{id}/update',[AdminHomePageController::class,'financialUpdate'])->name('financial.update');
     Route::delete('/financial/{id}/delete', [AdminHomePageController::class,'financialDelete'])->name('financial.delete'); 
+
+    // Administration
+    Route::resource('/roles',RoleController::class);
+    Route::resource('/users',UserController::class);
 });
 
 Route::group(['prefix' => 'editor', 'as' => 'editor.'], function ()

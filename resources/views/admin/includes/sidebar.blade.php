@@ -200,7 +200,25 @@
                 </li>
             </ul>
         </li>
-        
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-shape-polygon"></i>
+                </div>
+                <div class="menu-title">Administration</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{route('admin.roles.index')}}">
+                        <div class="menu-title">Roles</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.users.index')}}">
+                        <div class="menu-title">User</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li>
             <a class="" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

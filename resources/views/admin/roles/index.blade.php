@@ -30,11 +30,9 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $role->name }}</td>
-                        <td style="width: 40%;">
+                        <td>
                             @if ($role->permissions->count() > 0)
-                            @foreach ($role->permissions as $permission)
-                                <span class="badge bg-primary">{{ $permission->slug }}</span>
-                            @endforeach
+                                <span class="badge bg-primary">{{ $role->permissions->count() }}</span>
                             @else
                             <span class="badge bg-danger">No permissions</span>
                             @endif

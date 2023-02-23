@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\Module;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
@@ -26,7 +27,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $modules = Module::all();
+        return view('admin.roles.forms', compact('modules'));
     }
 
     /**

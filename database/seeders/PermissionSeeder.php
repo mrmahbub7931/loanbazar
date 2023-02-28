@@ -67,5 +67,71 @@ class PermissionSeeder extends Seeder
             'name'      =>  'Delete User',
             'slug'      =>  'app.users.delete'
         ]);
+
+        $moduleAppApplication = Module::updateOrCreate(['name' => 'Application Management']);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppApplication->id,
+            'name'          =>  'Access Application',
+            'slug'          =>  'app.applications.index'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppApplication->id,
+            'name'          =>  'Create Application',
+            'slug'          =>  'app.applications.create'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppApplication->id,
+            'name'          =>  'Edit Application',
+            'slug'          =>  'app.applications.edit'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppApplication->id,
+            'name'          =>  'Delete Application',
+            'slug'          =>  'app.applications.destroy'
+        ]);
+
+        $moduleAppDeal = Module::updateOrCreate(['name' => 'Best Deals Management']);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppDeal->id,
+            'name'          =>  'Access Deals',
+            'slug'          =>  'app.deals.index'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppDeal->id,
+            'name'          =>  'Create Deals',
+            'slug'          =>  'app.deals.create'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppDeal->id,
+            'name'          =>  'Edit Deals',
+            'slug'          =>  'app.deals.edit'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppDeal->id,
+            'name'          =>  'Delete Deals',
+            'slug'          =>  'app.deals.destroy'
+        ]);
+
+        $moduleAppServices = Module::updateOrCreate(['name' => 'Services Management']);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppServices->id,
+            'name'          =>  'Access Services',
+            'slug'          =>  'app.services.index'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppServices->id,
+            'name'          =>  'Create Services',
+            'slug'          =>  'app.services.create'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppServices->id,
+            'name'          =>  'Edit Services',
+            'slug'          =>  'app.services.edit'
+        ]);
+        Permission::updateOrCreate([
+            'module_id'     =>  $moduleAppServices->id,
+            'name'          =>  'Delete Services',
+            'slug'          =>  'app.services.destroy'
+        ]);
     }
 }

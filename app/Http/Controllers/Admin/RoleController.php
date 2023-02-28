@@ -61,7 +61,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $modules = Module::all();
+        return view('admin.roles.forms', compact('role','modules'));
     }
 
     /**

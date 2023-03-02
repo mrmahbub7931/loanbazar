@@ -1,14 +1,14 @@
 @extends('admin.layouts.master')
 
 @push('css')
-    
+
 @endpush
 
 @section('title', 'Roles')
 
 @section('content')
 <div class="card">
-    
+
     <div class="ml-auto m-3">
         <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-outline-success px-5 radius-30">New Role</a>
     </div>
@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     @foreach ($roles as $key => $role)
-                    
+
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $role->name }}</td>
@@ -41,14 +41,16 @@
                         <td>
 							<button type="button" class="btn btn-info text-white btn-sm" data-bs-toggle="dropdown">	<i class="bx bx-dots-vertical-rounded"></i>
 							</button>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
                                 <a class="dropdown-item" href="{{ route('admin.roles.edit',$role->id) }}">Edit</a>
-								<a onclick="deleteroles({{$role->id}})" class="dropdown-item" href="javascript:;">Delete</a>
-                                <form action="{{ route('admin.roles.destroy',$role->id) }}" method="post"
-                                    style="display: none" id="delete-form-{{$role->id}}">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                                @if ($role->deletable)
+                                    <a onclick="deleteroles({{$role->id}})" class="dropdown-item" href="javascript:;">Delete</a>
+                                    <form action="{{ route('admin.roles.destroy',$role->id) }}" method="post"
+                                        style="display: none" id="delete-form-{{$role->id}}">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                @endif
 							</div>
                         </td>
                     </tr>
@@ -72,7 +74,7 @@
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script>
-    function deletereviews(id) {
+    function deleteroles(id) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success',

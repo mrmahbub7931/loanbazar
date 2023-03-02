@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
 use App\Models\Module;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Roles\RoleStoreRequest;
+use App\Http\Requests\Roles\RoleUpdateRequest;
 
 class RoleController extends Controller
 {
@@ -37,9 +40,14 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleStoreRequest $request)
     {
-        //
+        Role::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ])->permissions()->sync($request->input('permissions', []));
+        notify()->success('Role Successfully Added.', 'Added');
+        return redirect()->route('admin.roles.index');
     }
 
     /**
@@ -72,9 +80,15 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleUpdateRequest $request, Role $role)
     {
-        //
+        $role->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);
+        $role->permissions()->sync($request->input('permissions', []));
+        notify()->success('Role Successfully Updated.', 'Updated');
+        return redirect()->route('admin.roles.index');
     }
 
     /**
@@ -85,6 +99,12 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        if ($role->deletable) {
+            $role->delete();
+            notify()->success("Role Successfully Deleted", "Deleted");
+        } else {
+            notify()->error("You can\'t delete system role.", "Error");
+        }
+        return back();
     }
 }

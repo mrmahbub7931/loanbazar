@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/header-colors.css') }}" />
+    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
 	<title>Loanbazar - @yield('title')</title>
 </head>
 
@@ -50,7 +51,7 @@
 		@include('admin.includes.footer')
 	</div>
 	<!--end wrapper-->
-	
+
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
 	<!--plugins-->
@@ -63,11 +64,12 @@
 	<script src="{{ asset('admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 
 	@stack('js')
-	
+
 	<script src="{{ asset('admin/assets/js/index.js') }}"></script>
 	<!--app JS-->
 	<script src="{{ asset('admin/assets/js/app.js') }}"></script>
-	
+    <script src="{{ asset('js/iziToast.js') }}"></script>
+	@include('vendor.lara-izitoast.toast')
 </body>
 
 

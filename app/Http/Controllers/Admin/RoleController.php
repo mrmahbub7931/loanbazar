@@ -7,6 +7,7 @@ use App\Models\Module;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Roles\RoleStoreRequest;
 use App\Http\Requests\Roles\RoleUpdateRequest;
 
@@ -19,6 +20,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.roles.index');
         $roles = Role::all();
         return view('admin.roles.index', compact('roles'));
     }
@@ -30,6 +32,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.roles.create');
         $modules = Module::all();
         return view('admin.roles.forms', compact('modules'));
     }
@@ -42,6 +45,7 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $request)
     {
+        Gate::authorize('app.roles.create');
         Role::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -69,6 +73,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        Gate::authorize('app.roles.edit');
         $modules = Module::all();
         return view('admin.roles.forms', compact('role','modules'));
     }
@@ -82,6 +87,7 @@ class RoleController extends Controller
      */
     public function update(RoleUpdateRequest $request, Role $role)
     {
+        Gate::authorize('app.roles.edit');
         $role->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -99,6 +105,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        Gate::authorize('app.roles.delete');
         if ($role->deletable) {
             $role->delete();
             notify()->success("Role Successfully Deleted", "Deleted");

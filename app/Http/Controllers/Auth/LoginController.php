@@ -56,10 +56,14 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt([ 'email' => $input['email'], 'password'=> $input['password'] ])) {
-            if (Auth()->user()->role_id == 1) {
+            if (Auth()->user()->role->slug == 'super-admin') {
                 return redirect()->route('admin.dashboard');
-            }elseif(Auth()->user()->role_id == 2){
+            }elseif(Auth()->user()->role->slug == 'user'){
                 // return redirect()->route('front.home');
+                return redirect()->back();
+            }elseif(Auth()->user()->role->slug == 'vendor'){
+                return redirect()->route('admin.dashboard');
+            }else {
                 return redirect()->back();
             }
         }else{

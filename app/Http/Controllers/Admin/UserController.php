@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\UserStoreRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,7 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('app.users.index');
+        $users = User::all();
+        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -25,7 +31,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('app.users.create');
+        $roles = Role::all();
+        return view('admin.users.forms',compact('roles'));
     }
 
     /**
@@ -34,9 +42,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        Gate::authorize('app.users.create');
+        $user = User::create([
+            'role_id' => $request->role_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+        ]);
+        notify()->success('User Successfully Added.', 'Added');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -58,7 +75,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        Gate::authorize('app.users.edit');
+        $roles = Role::all();
+        return view('admin.users.forms',compact('user','roles'));
     }
 
     /**
@@ -70,7 +89,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        Gate::authorize('app.users.edit');
+        $user->update([
+            'role_id' => $request->role_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
+            'phone' => $request->phone,
+        ]);
+
+        notify()->success('User Successfully Updated.', 'Updated');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -81,6 +110,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        Gate::authorize('app.users.delete');
+        $user->delete();
+        notify()->success('User Deleted Successfully','Deleted');
+        return back();
     }
 }

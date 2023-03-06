@@ -5,7 +5,7 @@
         </div>--}}
         <div>
             <h4 class="logo-text">Loanbazar</h4>
-        </div> 
+        </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
     </div>
@@ -25,10 +25,12 @@
                 <div class="menu-title">Slider</div>
             </a>
             <ul>
+                @role('super-admin')
                 <li> <a href="{{route('admin.getslider')}}"><i class="bx bx-right-arrow-alt"></i>All Sliders</a>
                 </li>
                 <li> <a href="{{route('admin.createSlider')}}"><i class="bx bx-right-arrow-alt"></i>Create</a>
                 </li>
+                @endrole
             </ul>
         </li>
         <li>
@@ -149,7 +151,7 @@
                     </a>
                 </li>
             </ul>
-            
+
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">

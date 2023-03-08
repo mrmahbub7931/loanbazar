@@ -68,7 +68,7 @@
     });
 
     // reset compare system
-    $('.compare_item_box').hide();
+    // $('.compare_item_box').hide();
     $(document.body).on('click','.compare_item_box_close,.compare_modal_box .btn-close,.compare_modal_box .modal-footer button',function(){
         $('.compare_item_box').hide();
         $(".compare-table thead tr,.compare-table tbody tr").remove();
@@ -94,7 +94,7 @@
                     $(this).removeClass('btn__red text-white');
                     document.querySelector('#item-'+itemID).remove();
                 }
-                
+
             }else {
                 alert('You are not able to compare more then 4 items. :)');
             }
@@ -104,15 +104,15 @@
             }else{
                 $('.compare_item_box').show();
             }
-                
-            
+
+
         });
     });
 
 
     $(document).on('click','.compare_pop_btn',function(e){
         e.preventDefault();
-        
+
         var that = $('.compare_pop_btn');
         var itemID = [], url,storage_url,compare;
         url = that.data('url');
@@ -120,7 +120,7 @@
         compare = that.data('compare');
         $('.compare_modal_box .modal-title span').text(compare);
         $('.rowItemID').each(function(){
-            itemID.push(this.value); 
+            itemID.push(this.value);
         });
         // return;
         $.ajax({
@@ -145,11 +145,11 @@
                 $.each(response.data, function(key,value){
                     var td_class = "compare_item_"+key;
                     $.each(response.header,function(hkey,hvalue){
-                        
+
                         if(hvalue == "image"){
-                            $(".compare-table thead tr").append('<th><img src="'+storage_url+'/frontend/assets/img/'+compare+'/'+value[hkey]+'"></th>')   
+                            $(".compare-table thead tr").append('<th><img src="'+storage_url+'/frontend/assets/img/'+compare+'/'+value[hkey]+'"></th>')
                         }else{
-                            
+
                             if(hkey == "eligibility" || hkey == "fees_charges" || hkey == "features"){
                                 var el = JSON.parse(value[hkey]);
                                 $(".compare-table tbody tr."+hkey).append('<td class="body '+td_class+'"><ul></ul></td>');
@@ -159,7 +159,7 @@
                             }else {
                                 $(".compare-table tbody tr."+hkey).append('<td>'+value[hkey]+'</td>');
                             }
-                            
+
                         }
                     });
                 });
@@ -167,8 +167,8 @@
 
             }
         });
-        
+
     });
 
-    
+
 })(jQuery);

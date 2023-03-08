@@ -11,7 +11,7 @@ a:hover {
 @media screen and (min-width:992px){
     .lb__header .navbar-expand-lg .navbar-nav .nav-link,.navbar-expand-lg .navbar-nav .nav-link{
         padding: 1.5rem 0.5rem !important;
-    }    
+    }
 }
 .text_align_justify{
     text-align: justify;
@@ -155,7 +155,7 @@ a:hover {
 
 /* services css */
 /*===========================
-      7.SERVICES css 
+      7.SERVICES css
 ===========================*/
 .services {
     padding: 22px;
@@ -848,7 +848,7 @@ figure.media-bg {
     border: 1px solid #ffdada;
 }
 
-/** 
+/**
  * Compare Item box css
 */
 
@@ -860,6 +860,7 @@ figure.media-bg {
     right: auto;
     height: max-content;
     z-index: 9;
+    display: none;
 }
 
 .compare_item_lists {

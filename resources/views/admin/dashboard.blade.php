@@ -1,9 +1,38 @@
 @extends('admin.layouts.master')
 
 @section('title', 'Dashboard')
-    
+
 @section('content')
     <div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card radius-10">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h3>Welcome {{ Auth::user()->name }}! <span class="text-warning"><?php
+                                    date_default_timezone_set("Asia/Dhaka");
+                                    $h = date('G');
+
+                                    if($h>=5 && $h<=11)
+                                    {
+                                        echo "Good Morning";
+                                    }
+                                    else if($h>=12 && $h<=15)
+                                    {
+                                        echo "Good Afternoon";
+                                    }
+                                    else
+                                    {
+                                        echo "Good Evening";
+                                    }
+                                ?></span>  </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
             <div class="col">
                 <div class="card radius-10">

@@ -1,11 +1,11 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
-        {{-- <div>
-            <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-        </div>--}}
         <div>
-            <h4 class="logo-text">Loanbazar</h4>
+            <img src="{{ asset('frontend/assets/img/logo.png') }}" class="logo-icon" alt="logo icon">
         </div>
+        {{-- <div>
+            <h4 class="logo-text">Loanbazar</h4>
+        </div> --}}
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
     </div>
@@ -18,6 +18,7 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+        @role('super-admin')
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -25,14 +26,15 @@
                 <div class="menu-title">Slider</div>
             </a>
             <ul>
-                @role('super-admin')
+
                 <li> <a href="{{route('admin.getslider')}}"><i class="bx bx-right-arrow-alt"></i>All Sliders</a>
                 </li>
                 <li> <a href="{{route('admin.createSlider')}}"><i class="bx bx-right-arrow-alt"></i>Create</a>
                 </li>
-                @endrole
+
             </ul>
         </li>
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-home-smile"></i>
@@ -234,6 +236,47 @@
                 @csrf
             </form>
         </li>
+        @endrole
+        @role('vendor')
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-home-smile"></i>
+                </div>
+                <div class="menu-title">Applications</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{route('admin.application.index')}}">
+                        <div class="menu-title">Loan and Card Application</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.application.life.index')}}">
+                        <div class="menu-title">Life and General Application</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.application.transport.index')}}">
+                        <div class="menu-title">Bike and Motor Application</div>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+        <li>
+            <a class="" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                <div class="parent-icon"><i class="bx bx-log-out"></i>
+                </div>
+                <div class="menu-title">Logout</div>
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </li>
+        @endrole
     </ul>
     <!--end navigation-->
 </div>

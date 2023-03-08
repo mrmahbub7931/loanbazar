@@ -9,6 +9,9 @@
                     <span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
                 </div>
             </div>
+           <div class="view_website_url">
+                <a href="{{ url('/') }}" target="_blank"><i class='bx bx-world'></i> Visit Website</a>
+           </div>
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item mobile-search-icon" style="display: none">
@@ -332,7 +335,7 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
                     </li>
-                    
+
                     <li>
                         <div class="dropdown-divider mb-0"></div>
                     </li>

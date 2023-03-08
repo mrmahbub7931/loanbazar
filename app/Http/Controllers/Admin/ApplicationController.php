@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,10 @@ class ApplicationController extends Controller
     public function edit($id)
     {
         $application = DB::table('loan_card_apply')->where('id', $id)->first();
-        return view('admin.application.edit', compact('application'));
+        $role = Role::where('slug','vendor')->first()->id;
+        $vendors = Role::findOrFail($role)->users()->get();
+        // dd($vendors);
+        return view('admin.application.edit', compact('application','vendors'));
     }
 
     public function update(Request $request, $id) {
@@ -27,7 +31,7 @@ class ApplicationController extends Controller
             'author_note' => $request->author_note,
             'status' => $request->status
         ];
-        
+
         $formUpdate = DB::table('loan_card_apply')->where('id', $id)->update($data);
         return redirect()->route('admin.application.index');
     }
@@ -56,7 +60,7 @@ class ApplicationController extends Controller
             'admin_note' => $request->admin_note,
             'status' => $request->status
         ];
-        
+
         $formUpdate = DB::table('life_general_form')->where('id', $id)->update($data);
         return redirect()->route('admin.application.life.index');
     }
@@ -85,7 +89,7 @@ class ApplicationController extends Controller
             'admin_note' => $request->admin_note,
             'status' => $request->status
         ];
-        
+
         $formUpdate = DB::table('bike_car_form')->where('id', $id)->update($data);
         return redirect()->route('admin.application.transport.index');
     }

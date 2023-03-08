@@ -9,7 +9,7 @@
 @section('content')
 <div class="row">
     <div class="col-xl-11 mx-auto">
-       
+
         <div class="card border-top border-0 border-4 border-primary">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -62,13 +62,13 @@
                         <label for="type" class="form-label">Application Type</label>
                         <input type="text" class="form-control" id="type" name="type" value="{{ $application->type == 'card' ? 'Credit Card' : 'Loan' }}" readonly>
                     </div>
-                    @if ($application->card_name !== null)    
+                    @if ($application->card_name !== null)
                         <div class="col-md-4 col-12">
                             <label for="card_name" class="form-label">Card Name</label>
                             <input type="text" class="form-control" id="card_name" name="card_name" value="{{ $application->card_name }}" readonly>
                         </div>
                     @endif
-                    @if ($application->loan_name !== null)    
+                    @if ($application->loan_name !== null)
                         <div class="col-md-4 col-12">
                             <label for="loan_name" class="form-label">Loan Name</label>
                             <input type="text" class="form-control" id="loan_name" name="loan_name" value="{{ $application->loan_name }}" readonly>
@@ -130,6 +130,12 @@
                         <label for="author_note">Author message / Any Special note!</label>
                         <input type="text" class="form-control" id="author_note" placeholder="Enter your special note" name="author_note" value="{{ $application->author_note }}">
                     </div>
+                    @role('vendor')
+                    <div class="col-12">
+                        <label for="vendor_note">Vendor message / Any Special note!</label>
+                        <input type="text" class="form-control" id="vendor_note" placeholder="Enter your special note" name="vendor_note" value="{{ $application->vendor_note }}">
+                    </div>
+                    @endrole
                     <div class="col-md-4 col-12">
                         <label class="form-label">Status</label>
 						<select class="form-control" name="status" id="status">
@@ -141,6 +147,15 @@
                             <option value="Contacted" {{$application->status == 'Contacted' ? 'selected' : ''}}>Contacted</option>
                             <option value="Not Eligible" {{$application->status == 'Not Eligible' ? 'selected' : ''}}>Not Eligible</option>
                             <option value="Decline" {{$application->status == 'Decline' ? 'selected' : ''}}>Decline</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label class="form-label">Send to vendor</label>
+						<select class="form-control" name="status" id="status">
+                            <option value="">Select Vendor</option>
+                            @foreach ($vendors as $vendor)
+                                <option value="{{$vendor->id}}" {{$vendor->id == $application->send_to_vendor ? 'selected' : ''}}>{{$vendor->name}}</option>
+                            @endforeach
                         </select>
                     </div>
 

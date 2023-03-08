@@ -159,7 +159,7 @@
                                                     <input type="text" name="company_name" class="form-control" id="s_company_name" placeholder="Enter company name">
                                                     <i class="uil uil-suitcase"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -169,7 +169,7 @@
                                                     <input type="text" name="s_designation" class="form-control" id="s_designation" placeholder="Enter your designation">
                                                     <i class="uil uil-crosshairs"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -179,7 +179,7 @@
                                                     <input type="text" name="monthly_salary" class="form-control" id="s_monthly_salary" placeholder="Enter your monthly salary">
                                                     <i class="uil uil-usd-circle"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -187,9 +187,9 @@
                                                 <label for="salary_paid_by">Salary paid by</label>
                                                 <select class="form-select" id="salary_paid_by" name="salary_paid_by">
                                                     <option value="">Salary paid by</option>
-                                                    <option value="bank_acc">Bank account</option>
-                                                    <option value="handcash">Hand cash</option>
-                                                    <option value="cheque">Cheque</option>
+                                                    <option value="Bank account">Bank account</option>
+                                                    <option value="Hand cash">Hand cash</option>
+                                                    <option value="Cheque">Cheque</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@
                                                     <input type="text" name="business_name" class="form-control" id="b_business_name" placeholder="Enter your business name">
                                                     <i class="uil uil-analysis"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                         <br>
@@ -214,9 +214,9 @@
                                                 <label for="b_business_type">Select your business type</label>
                                                 <select class="form-select" id="b_business_type" name="business_type">
                                                     <option value="">Select your business type</option>
-                                                    <option value="ltd_company">Ltd company</option>
-                                                    <option value="proprietorship">Proprietorship</option>
-                                                    <option value="partnership">Partnership</option>
+                                                    <option value="Ltd company">Ltd company</option>
+                                                    <option value="Proprietorship">Proprietorship</option>
+                                                    <option value="Partnership">Partnership</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -227,7 +227,7 @@
                                                     <input type="text" name="designation" class="form-control" id="designation" placeholder="Enter your designation">
                                                     <i class="uil uil-crosshairs"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -237,7 +237,7 @@
                                                     <input type="text" name="business_monthly_income" class="form-control" id="b_monthly_income" placeholder="Monthly income or yearly bank transaction">
                                                     <i class="uil uil-chart-line"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                     </div>
@@ -264,10 +264,10 @@
                                                     <input type="text" name="monthly_rental_income" class="form-control" id="l_rental_income" placeholder="Monthly rental income">
                                                     <i class="uil uil-money-bill"></i>
                                                 </div>
-    
+
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <br>
@@ -275,7 +275,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="input-group">
                                             <label for="existing_loan_card">Any existing loan or credit card?</label>
-                                            
+
                                             <div class="form-check-group d-flex">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="existing_lc" id="existing_loan_yes" value="1">
@@ -291,7 +291,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="input-group">
                                             <label for="existing_loan_card">Do you have E-TIN?</label>
-                                            
+
                                             <div class="form-check-group d-flex">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="existing_etin" id="etin_yes" value="1">
@@ -314,7 +314,7 @@
                                                 <input type="text" class="form-control" id="user_note" placeholder="Enter your special note" name="user_note">
                                                 <i class="uil uil-comment-alt-message"></i>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +330,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-12 col-md-6">
                                         <div class="input-group">
                                             <label for="cpassword">Re-type your password</label>

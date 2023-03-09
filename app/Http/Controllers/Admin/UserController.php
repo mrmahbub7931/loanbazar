@@ -88,9 +88,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        return $request->all();
+        // return $request->all();
         Gate::authorize('app.users.edit');
         $user->update([
             'name' => $request->name,

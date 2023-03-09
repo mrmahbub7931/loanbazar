@@ -1,14 +1,14 @@
 @extends('admin.layouts.master')
 
 @push('css')
-    
+
 @endpush
 
 @section('title', 'Application')
 
 @section('content')
 <div class="card">
-    
+
     <div class="ml-auto m-3">
         {{-- <a href="{{ route('admin.deals.create') }}" class="btn btn-sm btn-outline-success px-5 radius-30">Create Deals</a> --}}
     </div>
@@ -20,6 +20,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Type</th>
+                        <th>Vendor</th>
                         <th>Apply Date</th>
                         <th>Phone</th>
                         <th>status</th>
@@ -28,12 +29,13 @@
                 </thead>
                 <tbody>
                     @foreach ($applications as $key => $application)
-                    
-                    
+
+
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $application->full_name }}</td>
                         <td>{{ $application->type }}</td>
+                        <td>{{ getVendorName($application->send_to_vendor) }}</td>
                         <td>{{ date('F d, Y', strtotime($application->created_at)) }}</td>
                         <td>{{ $application->phone }}</td>
                         @if($application->status === 'Disbursed')
@@ -89,7 +91,7 @@
                         <td>
 							<button type="button" class="btn btn-info text-white btn-sm" data-bs-toggle="dropdown">	<i class="bx bx-dots-vertical-rounded"></i>
 							</button>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
                                 <a class="dropdown-item" href="{{ route('admin.application.edit', $application->id) }}">Edit</a>
 								<a onclick="deleteApplication({{$application->id}})" class="dropdown-item" href="javascript:;">Delete</a>
                                 <form action="{{ route('admin.application.destroy', $application->id) }}" method="post"
@@ -107,6 +109,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Type</th>
+                        <th>Vendor</th>
                         <th>Apply Date</th>
                         <th>Phone</th>
                         <th>status</th>

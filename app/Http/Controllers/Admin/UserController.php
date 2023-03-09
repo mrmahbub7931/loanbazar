@@ -6,9 +6,10 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\UserStoreRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Users\UserStoreRequest;
+use App\Http\Requests\Users\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -64,7 +65,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        // Gate::authorize('app.users.index');
+        return view('admin.users.view',compact('user'));
     }
 
     /**
@@ -83,15 +85,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
+        return $request->all();
         Gate::authorize('app.users.edit');
         $user->update([
-            'role_id' => $request->role_id,
             'name' => $request->name,
             'email' => $request->email,
             'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
@@ -99,7 +100,7 @@ class UserController extends Controller
         ]);
 
         notify()->success('User Successfully Updated.', 'Updated');
-        return redirect()->route('admin.users.index');
+        return back();
     }
 
     /**

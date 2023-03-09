@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/header-colors.css') }}" />
+    <link href="{{ asset('frontend/assets/img/loanbazar_ico.png') }}" rel="icon shortcut" />
     <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
 	<title>Loanbazar - @yield('title')</title>
 </head>

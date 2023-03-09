@@ -51,7 +51,7 @@ a {
 	top: 0;
 	bottom: 0;
 	left: 0;
-	background: #203247;
+	background: #101924;
 	border-right: 0 solid #203247;
 	z-index: 11;
 	box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12)!important;
@@ -202,8 +202,8 @@ a {
 	margin-right: 10px
 }
 .sidebar-wrapper .metismenu ul {
-	border: 1px solid #203247;
-    background: #203247;
+	border: 1px solid #101924;
+    background: #101924;
 }
 .sidebar-wrapper .metismenu ul ul a {
 	padding: 8px 15px 8px 30px

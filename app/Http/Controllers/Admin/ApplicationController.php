@@ -6,13 +6,21 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
     public function index()
     {
-        $applications = DB::table('loan_card_apply')->latest()->get();
+        // dd(Auth::user()->role->slug);
+        if (Auth::user()->role->slug == 'super-admin') {
+            $applications = DB::table('loan_card_apply')->latest()->get();
+        }else {
+            $applications = DB::table('loan_card_apply')->where('send_to_vendor',Auth::user()->id)->latest()->get();
+        }
+    //    dd($applications);
+
         return view('admin.application.index', compact('applications'));
     }
 
@@ -29,9 +37,11 @@ class ApplicationController extends Controller
         // return $request->all();
         $data = [
             'author_note' => $request->author_note,
+            'vendor_note' => isset($request->vendor_note) ? $request->vendor_note : null,
+            'send_to_vendor' => $request->send_to_vendor,
             'status' => $request->status
         ];
-
+        // dd($data);
         $formUpdate = DB::table('loan_card_apply')->where('id', $id)->update($data);
         return redirect()->route('admin.application.index');
     }

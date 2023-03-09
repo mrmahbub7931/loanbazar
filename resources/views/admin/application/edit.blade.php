@@ -130,12 +130,12 @@
                         <label for="author_note">Author message / Any Special note!</label>
                         <input type="text" class="form-control" id="author_note" placeholder="Enter your special note" name="author_note" value="{{ $application->author_note }}">
                     </div>
-                    @role('vendor')
+                    {{-- @role('vendor') --}}
                     <div class="col-12">
                         <label for="vendor_note">Vendor message / Any Special note!</label>
-                        <input type="text" class="form-control" id="vendor_note" placeholder="Enter your special note" name="vendor_note" value="{{ $application->vendor_note }}">
+                        <input type="text" class="form-control" id="vendor_note" placeholder="Enter your special note" name="vendor_note" value="{{ $application->vendor_note }}" @role('super-admin') readonly @endrole>
                     </div>
-                    @endrole
+                    {{-- @endrole --}}
                     <div class="col-md-4 col-12">
                         <label class="form-label">Status</label>
 						<select class="form-control" name="status" id="status">
@@ -151,7 +151,7 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <label class="form-label">Send to vendor</label>
-						<select class="form-control" name="status" id="status">
+						<select class="form-control" name="send_to_vendor" id="send_to_vendor">
                             <option value="">Select Vendor</option>
                             @foreach ($vendors as $vendor)
                                 <option value="{{$vendor->id}}" {{$vendor->id == $application->send_to_vendor ? 'selected' : ''}}>{{$vendor->name}}</option>

@@ -25,12 +25,12 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->id);
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . request()->route('user')->id],
-            'password' => ['required', 'string', 'min:8'],
-            'role_id' => ['required'],
-            'phone' => ['required'],
+            'password' => ['nullable', 'string', 'min:8'],
+            'role' => ['required']
         ];
     }
 }

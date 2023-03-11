@@ -18,7 +18,10 @@ if (!function_exists('getUsername')) {
 
     function getVendorName($vendorID)
     {
-        return DB::table('users')->where('id',$vendorID)->first()->name;
+        if (DB::table('users')->where('id',$vendorID)->exists()) {
+            return DB::table('users')->where('id',$vendorID)->first()->name;
+        }
+        return null;
     }
 
     function totalApplicationForVendor()

@@ -85,16 +85,16 @@
                                 </div>
                             @endforelse
                             <button type="button" class="btn btn-danger" onClick="resetForm('roleFrom')">
-                                <i class="fas fa-redo"></i>
+                                <i class="bx bx-redo"></i>
                                 <span>Reset</span>
                             </button>
 
                             <button type="submit" class="btn btn-primary">
                                 @isset($role)
-                                    <i class="fas fa-arrow-circle-up"></i>
+                                    <i class='bx bx-up-arrow-circle'></i>
                                     <span>Update</span>
                                 @else
-                                    <i class="fas fa-plus-circle"></i>
+                                    <i class="bx bx-plus-circle"></i>
                                     <span>Create</span>
                                 @endisset
                             </button>

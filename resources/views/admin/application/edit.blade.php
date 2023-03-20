@@ -149,6 +149,7 @@
                             <option value="Decline" {{$application->status == 'Decline' ? 'selected' : ''}}>Decline</option>
                         </select>
                     </div>
+                    @role('super-admin')
                     <div class="col-md-4 col-12">
                         <label class="form-label">Send to vendor</label>
 						<select class="form-control" name="send_to_vendor" id="send_to_vendor">
@@ -158,6 +159,7 @@
                             @endforeach
                         </select>
                     </div>
+                    @endrole
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary px-5">Update</button>

@@ -138,8 +138,13 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{route('admin.application.index')}}">
-                        <div class="menu-title">Loan and Card Application</div>
+                    <a href="{{route('admin.application.loan.index')}}">
+                        <div class="menu-title">Loan Application</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.application.card.index')}}">
+                        <div class="menu-title">Card Application</div>
                     </a>
                 </li>
                 <li>
@@ -246,11 +251,16 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{route('admin.application.index')}}">
-                        <div class="menu-title">Loan and Card Application</div>
+                    <a href="{{route('admin.application.loan.index')}}">
+                        <div class="menu-title">Loan Application</div>
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.application.card.index')}}">
+                        <div class="menu-title">Card Application</div>
+                    </a>
+                </li>
+                {{-- <li>
                     <a href="{{route('admin.application.life.index')}}">
                         <div class="menu-title">Life and General Application</div>
                     </a>
@@ -259,7 +269,7 @@
                     <a href="{{route('admin.application.transport.index')}}">
                         <div class="menu-title">Bike and Motor Application</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
 
         </li>

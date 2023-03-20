@@ -41,8 +41,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','pr
     Route::post('/services', [AdminHomePageController::class, 'storeservices'])->name('services.store');
     Route::put('/services/{id}', [AdminHomePageController::class, 'updateservices'])->name('services.update');
     Route::delete('/services/{id}', [AdminHomePageController::class, 'deleteservices'])->name('services.delete');
-    // Application Controller
-    Route::get('application', [ApplicationController::class, 'index'])->name('application.index');
+    // Application Controller for loan
+    Route::get('application/loan', [ApplicationController::class, 'index'])->name('application.loan.index');
+    Route::get('application/card', [ApplicationController::class, 'cardIndex'])->name('application.card.index');
     Route::get('/application/{id}', [ApplicationController::class, 'edit'])->name('application.edit');
     Route::put('/application/{id}', [ApplicationController::class, 'update'])->name('application.update');
     Route::delete('/application/{id}', [ApplicationController::class, 'destroy'])->name('application.destroy');

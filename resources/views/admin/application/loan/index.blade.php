@@ -19,7 +19,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Type</th>
+                        {{-- <th>Type</th> --}}
                         <th>Vendor</th>
                         <th>Apply Date</th>
                         <th>Phone</th>
@@ -34,7 +34,7 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $application->full_name }}</td>
-                        <td>{{ $application->type }}</td>
+                        {{-- <td>{{ $application->type }}</td> --}}
                         <td>@if(getVendorName($application->send_to_vendor) == null) <span class="btn btn-sm btn-warning radius-30 text-white">Not yet assign to any vendor</span>@endif{{ getVendorName($application->send_to_vendor) }}</td>
                         <td>{{ date('F d, Y', strtotime($application->created_at)) }}</td>
                         <td>{{ $application->phone }}</td>
@@ -108,7 +108,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Type</th>
+                        {{-- <th>Type</th> --}}
                         <th>Vendor</th>
                         <th>Apply Date</th>
                         <th>Phone</th>

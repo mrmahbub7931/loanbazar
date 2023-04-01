@@ -52,7 +52,7 @@ img{
     border-color: #ed1e2e;
 }
 .action__btn {
-    display: inline-block;
+    display: inline-flex;
     position: relative;
     padding: 10px 35px;
     cursor: pointer;
@@ -60,6 +60,7 @@ img{
     font-weight: 700;
     transition: all 0.35s ease-in-out;
     z-index: 1;
+    align-items: center;
 }
 
 .action__btn:after {
@@ -131,4 +132,12 @@ h1.heading {
 @keyframes imageUpDown {
     0% { transform: translateY(0); }
     100% { transform: translateY(-20px); }
+}
+
+/* responsive css */
+
+@media screen and (max-width: 767px){
+    h1.heading, h1 {
+        font-size: 1.5rem;
+    }
 }

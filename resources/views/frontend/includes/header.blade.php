@@ -9,13 +9,13 @@
                     <button type="button" class="btn-close btn-close-white offcanvas-close offcanvas-nav-close"
                         aria-label="Close"></button>
                 </div>
-                
+
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('front.home') }}">Home</a></li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#!">Cards</a>
                         <ul class="dropdown-menu">
                             @foreach (\App\Models\CardService::all() as $card)
-                            
+
                             <li class="nav-item"><a class="dropdown-item" href="{{route('cards.page.url',$card->slug)}}">{{ $card->service_title }}</a>
                             </li>
                             @endforeach
@@ -25,7 +25,7 @@
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#!">Loans</a>
                         <ul class="dropdown-menu">
                             @foreach (\App\Models\LoanService::all() as $loan)
-                            
+
                             <li class="nav-item"><a class="dropdown-item" href="{{route('loans.page.url',$loan->slug)}}">{{ $loan->service_title }}</a>
                             </li>
                             @endforeach
@@ -75,7 +75,7 @@
                 <ul class="navbar-nav flex-row align-items-center ms-auto" data-sm-skip="true">
                     <li class="nav-item"><a class="nav-link" data-toggle="offcanvas-info"><i
                                 class="uil uil-info-circle"></i></a></li>
-                    <li class="nav-item d-none d-md-block">
+                    <li class="nav-item">
                         @guest
                         <a href="#" class="btn btn-sm btn__red rounded-pill" data-bs-toggle="modal"
                             data-bs-target="#modal-01">Sign In</a>
@@ -164,7 +164,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="form-label-group mb-4">
                                     <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" placeholder="Phone">
                                     <label for="phone">Phone</label>
@@ -184,7 +184,7 @@
                                     </span>
                                 @enderror
                                 </div>
-                                
+
                                 <div class="form-label-group mb-4">
                                     <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" id="password-confirm">
                                     <label for="password">Confirm Password</label>

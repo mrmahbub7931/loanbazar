@@ -8,7 +8,7 @@
     <div class="full__height">
         <div id="main__carousel" class="owl-carousel">
             @if (count($sliders) > 0)
-            
+
             @foreach ($sliders as $slider)
             <div class="item">
                 <div class="slide__content__wrapper">
@@ -59,7 +59,7 @@
             <div class="col-12">
                 <div id="best__deal__slider" class="owl-carousel">
                     @foreach ($deals as $deal)
-                        
+
                     <div class="item">
                         <div class="card shadow">
                             <div class="img">
@@ -73,20 +73,20 @@
                                             $bodyArr = json_decode($dealBody->body);
                                         @endphp
                                         @foreach ($bodyArr as $item)
-                                        
+
                                             <li><span><i class="uil uil-check"></i></span><span>{{ $item }}</li>
                                         @endforeach
                                     @endforeach
                                 </ul>
                             </div>
                             <div class="body__action__btn">
-                                <a href="{{ $deal->btn_url }}" class="body__action__btn__link"> <i class="uil uil-arrow-right fs-21"></i>
+                                <a href="{{ $deal->btn_url }}" class="action__btn text-white"> <i class="uil uil-arrow-right fs-21"></i>
                                     {{ $deal->btn_txt }}</a>
                             </div>
                         </div>
                     </div>
                     @endforeach
-                    
+
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
         </div>
         <div class="row justify-content-center">
             @foreach ($services as $service)
-                
+
             <div class="col-lg-4 col-sm-6 col-12" data-cues="slideInUp" data-delay="100">
                 <div class="services">
                     <div class="services-title-icon d-flex align-items-center">
@@ -233,7 +233,7 @@
         <div class="row pb-md-12">
             <div class="col-md-12 col-lg-12 col-xl-12 mx-auto">
                 <div class="row align-items-center counter-wrapper gy-4 gy-md-0">
-                        
+
                     <div class="col-md-4 text-center" data-cues="slideInLeft" data-delay="200">
                         <div class="card shadow-lg">
                             <div class="card-body">
@@ -291,7 +291,7 @@
                         </div>
                     </div>
                     <!--/column -->
-                    
+
                 </div>
                 <!--/.row -->
             </div>
@@ -320,7 +320,7 @@
             <div class="col-12">
                 @isset($cpartners)
                 <div id="partners__flex">
-                   
+
                     @foreach (\App\Models\CorporatePartners::latest()->get() as $corprate)
                     <div class="item">
                         <div class="card shadow-lg h-100">
@@ -342,7 +342,7 @@
                 </div>
                 @endisset
             </div>
-            
+
         </div>
         <div class="row text-center justify-content-center align-items-center mt-4" data-cues="zoomIn" data-group="images">
             <h2 class="fs-21 text-uppercase text-black text-center mb-12 mt-15">Helping you choose from our trusted

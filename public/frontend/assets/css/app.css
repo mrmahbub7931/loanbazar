@@ -1077,4 +1077,26 @@ header .navbar-collapse .navbar-nav > li.nav-item:hover:after {
     .footer__bottom ul {
         display: none !important;
     }
+
+    #main__carousel .content h1.heading {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        line-height: 40px;
+    }
+    #main__carousel .content .intro {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    div#partners__flex .item {
+        width: 50%;
+        padding: 15px;
+    }
+    .compare_item_lists {
+        overflow-x: scroll;
+    }
+    .compare_item_box_close {
+        background: #fff;
+        left: 0;
+        right: auto;
+    }
 }

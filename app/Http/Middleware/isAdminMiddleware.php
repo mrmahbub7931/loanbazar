@@ -17,8 +17,13 @@ class isAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role_id == 1) {
-            return $next($request);
+        if (Auth::check() && Auth::user()->role->slug) {
+            if (!Auth::user()->role->slug == 'user') {
+                return $next($request);
+            }else{
+                return redirect()->route('front.home');
+            }
+
         }else{
             return redirect()->route('front.home');
         }

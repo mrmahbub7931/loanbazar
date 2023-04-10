@@ -18,7 +18,7 @@ use App\Http\Controllers\Admin\AdminCardServiceController;
 use App\Http\Controllers\Admin\AdminLoanserviceController;
 use App\Http\Controllers\Admin\AdminExchangeRateController;
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','prevent-back-history']], function ()
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','prevent-back-history','can:app.dashboard']], function ()
 {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/slider', [AdminHomePageController::class, 'getSliderList'])->name('getslider');

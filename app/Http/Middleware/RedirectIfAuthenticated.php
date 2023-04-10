@@ -26,8 +26,12 @@ class RedirectIfAuthenticated
             //     return redirect(RouteServiceProvider::HOME);
             // }
             if (Auth::guard($guard)->check() && Auth::user()->role->slug == 'user') {
+                return "test user";
                 return redirect()->route('front.home');
-            }elseif(Auth::guard($guard)->check() && Auth::user()->role->slug == 'super-admin'){
+            }
+
+            if(Auth::guard($guard)->check() && Auth::user()->role->slug == 'super-admin'){
+                return "test admin";
                 return redirect()->route('admin.dashboard');
             }
         }

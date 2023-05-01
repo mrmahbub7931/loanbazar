@@ -6,23 +6,27 @@ use Carbon\Carbon;
 use App\Models\Writer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class WriterCotroller extends Controller
 {
     public function index()
     {
+        Gate::authorize('app.writers.index');
         $writers = Writer::latest()->get();
         return view('admin.writer.index',compact('writers'));
     }
 
     public function create()
     {
+        Gate::authorize('app.writers.create');
         return view('admin.writer.create');
     }
 
     public function store(Request $request)
     {
+        Gate::authorize('app.writers.create');
         $request->validate([
             'writer_name' => 'required|max:255',
         ]);
@@ -32,7 +36,7 @@ class WriterCotroller extends Controller
         if (isset($writer_image)) {
             $currentDate = Carbon::now()->toDateString();
                 $writerimagename = $currentDate.uniqid().'.'.$writer_image->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/writers')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/writers');
                 }
@@ -49,23 +53,25 @@ class WriterCotroller extends Controller
 
     public function edit(Request $request,$id)
     {
+        Gate::authorize('app.writers.edit');
         $writer = Writer::findOrfail($id);
         return view('admin.writer.edit',compact('writer'));
     }
-    
+
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.writers.edit');
         $writer = Writer::findOrfail($id);
         $writer_image = $request->file('writer_image');
         $old_image = $writer->writer_image;
         if (isset($writer_image)) {
             $currentDate = Carbon::now()->toDateString();
                 $writerimagename = $currentDate.uniqid().'.'.$writer_image->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/writers')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/writers');
                 }
-                
+
                 if (Storage::disk('public')->exists('frontend/assets/img/writers/'.$old_image)) {
                     Storage::disk('public')->delete('frontend/assets/img/writers/'.$old_image);
                 }
@@ -82,6 +88,7 @@ class WriterCotroller extends Controller
 
     public function delete($id)
     {
+        Gate::authorize('app.writers.destroy');
         Writer::findOrfail($id)->delete();
         return redirect()->back();
     }

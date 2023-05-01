@@ -10,18 +10,21 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     public function PostIndex()
     {
+        Gate::authorize('app.posts.index');
         $posts = Post::all();
         return view('admin.posts.index', compact('posts'));
     }
 
     public function PostCreate()
     {
+        Gate::authorize('app.posts.create');
         $categories = Category::all();
         $writers = Writer::all();
         return view('admin.posts.create', compact('categories','writers'));
@@ -29,6 +32,7 @@ class PostController extends Controller
 
     public function PostStore(Request $request)
     {
+        Gate::authorize('app.posts.create');
         $request->validate([
             'title' => 'required|max:255',
             'status' => 'required'
@@ -41,7 +45,7 @@ class PostController extends Controller
         if (isset($featured_image)) {
             $currentDate = Carbon::now()->toDateString();
                 $postfeatreudimage = $currentDate.uniqid().'.'.$featured_image->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/blog/featured')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/blog/featured');
                 }
@@ -54,7 +58,7 @@ class PostController extends Controller
         if (isset($cover_img)) {
             $currentDate = Carbon::now()->toDateString();
                 $postcoverimagename = $currentDate.uniqid().'.'.$cover_img->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/blog/cover')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/blog/cover');
                 }
@@ -78,6 +82,7 @@ class PostController extends Controller
 
     public function PostEdit($id)
     {
+        Gate::authorize('app.posts.edit');
         $post = Post::findOrfail($id);
         $categories = Category::all();
         $writers = Writer::all();
@@ -86,6 +91,7 @@ class PostController extends Controller
 
     public function PostUpdate(Request $request,$id)
     {
+        Gate::authorize('app.posts.edit');
         $request->validate([
             'title' => 'required|max:255'
         ]);
@@ -98,11 +104,11 @@ class PostController extends Controller
         if (isset($featured_img)) {
             $currentDate = Carbon::now()->toDateString();
                 $postfeatreudimage = $currentDate.uniqid().'.'.$featured_img->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/blog/featured')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/blog/featured');
                 }
-                
+
                 if (Storage::disk('public')->exists('frontend/assets/img/blog/featured/'.$featured_old_img)) {
                     Storage::disk('public')->delete('frontend/assets/img/blog/featured/'.$featured_old_img);
                 }
@@ -116,11 +122,11 @@ class PostController extends Controller
         if (isset($cover_img)) {
             $currentDate = Carbon::now()->toDateString();
                 $postcoverimagename = $currentDate.uniqid().'.'.$cover_img->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/blog/cover')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/blog/cover');
                 }
-                
+
                 if (Storage::disk('public')->exists('frontend/assets/img/blog/cover/'.$cover_old_image)) {
                     Storage::disk('public')->delete('frontend/assets/img/blog/cover/'.$cover_old_image);
                 }
@@ -146,12 +152,13 @@ class PostController extends Controller
 
     public function PostDelete($id)
     {
+        Gate::authorize('app.posts.destroy');
         $post = Post::findOrfail($id);
         $featured_img = $post->featured_img;
         if (Storage::disk('public')->exists('frontend/assets/img/blog/featured/'.$featured_img)) {
             Storage::disk('public')->delete('frontend/assets/img/blog/featured/'.$featured_img);
         }
-        
+
         $cover_img = $post->cover_img;
         if (Storage::disk('public')->exists('frontend/assets/img/blog/cover/'.$cover_img)) {
             Storage::disk('public')->delete('frontend/assets/img/blog/cover/'.$cover_img);

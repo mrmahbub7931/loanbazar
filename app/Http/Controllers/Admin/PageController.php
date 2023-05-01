@@ -7,23 +7,26 @@ use App\Models\Page;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
     /**
-     * Display page index 
+     * Display page index
      */
     public function PageIndex()
     {
+        Gate::authorize('app.pages.index');
         $pages = Page::all();
         return view('admin.pages.index', compact('pages'));
     }
     /**
-     * Display page create form 
+     * Display page create form
      */
     public function PageCreate()
     {
+        Gate::authorize('app.pages.create');
         return view('admin.pages.create');
     }
 
@@ -32,6 +35,7 @@ class PageController extends Controller
      */
     public function PageStore(Request $request)
     {
+        Gate::authorize('app.pages.create');
         $request->validate( [
             'title' => 'required|max:255',
             'status' => 'required',
@@ -64,27 +68,29 @@ class PageController extends Controller
 
     public function PageEdit($id)
     {
+        Gate::authorize('app.pages.edit');
         $page = Page::findOrfail($id);
         return view('admin.pages.edit',compact('page'));
     }
 
     /**
-     * Update page data 
+     * Update page data
      * @param $id
      */
     public function PageUpdate(Request $request, $id)
     {
+        Gate::authorize('app.pages.edit');
         $page = Page::findOrfail($id);
         $cover_img = $request->file('cover_img');
         $old_image = $page->cover_img;
         if (isset($cover_img)) {
             $currentDate = Carbon::now()->toDateString();
                 $coverimagename = $currentDate.uniqid().'.'.$cover_img->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/pages')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/pages');
                 }
-                
+
                 if (Storage::disk('public')->exists('frontend/assets/img/pages/'.$old_image)) {
                     Storage::disk('public')->delete('frontend/assets/img/pages/'.$old_image);
                 }
@@ -106,6 +112,7 @@ class PageController extends Controller
 
     public function PageDelete($id)
     {
+        Gate::authorize('app.pages.destroy');
         $page = Page::findOrfail($id);
         $old_image = $page->cover_img;
         if (Storage::disk('public')->exists('frontend/assets/img/pages/'.$old_image)) {

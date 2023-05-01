@@ -466,11 +466,6 @@ class PermissionSeeder extends Seeder
         ]);
         Permission::updateOrCreate([
             'module_id'     =>  $moduleAppMedia->id,
-            'name'          =>  'Edit Media',
-            'slug'          =>  'app.media.edit'
-        ]);
-        Permission::updateOrCreate([
-            'module_id'     =>  $moduleAppMedia->id,
             'name'          =>  'Delete Media',
             'slug'          =>  'app.media.destroy'
         ]);

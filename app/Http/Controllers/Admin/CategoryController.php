@@ -46,12 +46,14 @@ class CategoryController extends Controller
 
     public function edit(Request $request,$id)
     {
+        Gate::authorize('app.categories.edit');
         $category = Category::findOrfail($id);
         return view('admin.category.edit',compact('category'));
     }
 
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.categories.edit');
         $data = [
             'name' => $request->name,
             'slug'  => Str::slug($request->slug),
@@ -66,6 +68,7 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
+        Gate::authorize('app.categories.destroy');
         Category::findOrfail($id)->delete();
         return redirect()->back();
     }

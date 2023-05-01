@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ExchangneRate;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class AdminExchangeRateController extends Controller
 {
@@ -14,6 +15,7 @@ class AdminExchangeRateController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.exchange.index');
         $exchange_rates = ExchangneRate::all();
         return view('admin.tools.exchange_rate.index',compact('exchange_rates'));
     }
@@ -23,6 +25,7 @@ class AdminExchangeRateController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.exchange.create');
         return view('admin.tools.exchange_rate.create');
     }
 
@@ -32,6 +35,7 @@ class AdminExchangeRateController extends Controller
 
      public function store(Request $request)
      {
+        Gate::authorize('app.exchange.create');
         // dd($request->all());
         $request->validate([
             'date' => 'required',
@@ -57,17 +61,18 @@ class AdminExchangeRateController extends Controller
       */
      public function edit($id)
      {
+        Gate::authorize('app.exchange.edit');
         $exchange_rate = ExchangneRate::findOrfail($id);
         return view('admin.tools.exchange_rate.edit', compact('exchange_rate'));
      }
 
      /**
-      * Update circular data method 
-      * @param $id 
+      * Update circular data method
+      * @param $id
       */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        Gate::authorize('app.exchange.edit');
         ExchangneRate::where('id',$id)->update([
             'date' => $request->date,
             'currency' => json_encode($request->currency),
@@ -77,22 +82,16 @@ class AdminExchangeRateController extends Controller
         ]);
 
         return redirect()->route('admin.exchange_rate.index');
-        // $circular = Circular::findOrfail($id);
-        // $circular->job_title = $request->job_title;
-        // $circular->slug = Str::slug($request->job_title);
-        // $circular->job_location = $request->job_location;
-        // $circular->job_description = $request->job_description;
-        // $circular->status = $request->status;
-        // $circular->update();
-        // return redirect()->route('admin.circular.index');
+
     }
 
     /**
-     * Delete ExchangeRate method 
-     * @param $id 
+     * Delete ExchangeRate method
+     * @param $id
      */
     public function destroy($id)
     {
+        Gate::authorize('app.exchange.destroy');
         ExchangneRate::findOrfail($id)->delete();
         return redirect()->back();
     }

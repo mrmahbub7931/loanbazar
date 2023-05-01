@@ -7,12 +7,14 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ReviewController extends Controller
 {
     public function index()
     {
+        Gate::authorize('app.reviews.index');
         $reviews = Review::all();
         return view('admin.reviews.index', compact('reviews'));
     }
@@ -22,6 +24,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.reviews.create');
         return view('admin.reviews.create');
     }
 
@@ -31,6 +34,7 @@ class ReviewController extends Controller
 
      public function store(Request $request)
      {
+        Gate::authorize('app.reviews.create');
         $request->validate([
             'name' => 'required',
             'company_name' => 'required',
@@ -43,7 +47,7 @@ class ReviewController extends Controller
         if (isset($avatar_image)) {
             $currentDate = Carbon::now()->toDateString();
                 $avatarimagename = $currentDate.uniqid().'.'.$avatar_image->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/reviews')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/reviews');
                 }
@@ -66,16 +70,18 @@ class ReviewController extends Controller
       */
      public function edit($id)
      {
+        Gate::authorize('app.reviews.edit');
         $review = Review::findOrfail($id);
         return view('admin.reviews.edit', compact('review'));
      }
 
      /**
-      * Update circular data method 
-      * @param $id 
+      * Update circular data method
+      * @param $id
       */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.reviews.edit');
         $review = Review::findOrfail($id);
         $old_image = $review->avatar;
         $avatar_image = $request->file('avatar');
@@ -105,11 +111,12 @@ class ReviewController extends Controller
     }
 
     /**
-     * Delete circular post method 
-     * @param $id 
+     * Delete circular post method
+     * @param $id
      */
     public function delete($id)
     {
+        Gate::authorize('app.reviews.destroy');
         $review = Review::findOrfail($id);
         $old_image = $review->avatar;
         if (Storage::disk('public')->exists('frontend/assets/img/reviews/'.$old_image)) {

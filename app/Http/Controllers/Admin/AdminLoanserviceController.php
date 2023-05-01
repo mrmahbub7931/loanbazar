@@ -12,24 +12,27 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class AdminLoanserviceController extends Controller
 {
     public function index()
     {
+        Gate::authorize('app.loans.index');
         $loans = LoanService::all();
         return view('admin.loans.index', compact('loans'));
     }
 
     public function create()
     {
+        Gate::authorize('app.loans.create');
         return view('admin.loans.create');
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        Gate::authorize('app.loans.create');
         $request->validate( [
             'service_title' => 'required|max:255',
             'status' => 'required',
@@ -40,7 +43,7 @@ class AdminLoanserviceController extends Controller
         if (isset($header_image)) {
             $currentDate = Carbon::now()->toDateString();
                 $headerimagename = $currentDate.uniqid().'.'.$header_image->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/loans')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/loans');
                 }
@@ -58,14 +61,14 @@ class AdminLoanserviceController extends Controller
                 if (isset($bank_logo)) {
                         $currentDate = Carbon::now()->toDateString();
                         $banklogoname = $currentDate.uniqid().'.'.$bank_logo->getClientOriginalExtension();
-            
+
                         if (!Storage::disk('public')->exists('frontend/assets/img/loans')) {
                             Storage::disk('public')->makeDirectory('frontend/assets/img/loans');
                         }
                         // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
                         Storage::disk('public')->putFileAs('frontend/assets/img/loans/',$bank_logo,$banklogoname);
                         // $laonServiceRow->bank_logo = $banklogoname;
-                
+
                 }
                 DB::table('loan_service_rows')->insert([
                     'loan_service_id' => $loan_id, 'bank_logo' => $banklogoname,'notify_top' => $row_service['notify_top'],'bank_name' => $row_service['bank_name'], 'ineterest_rate_range' => $row_service['ineterest_rate_range'], 'processing_fee' => $row_service['processing_fee'], 'loan_amount' => $row_service['loan_amount'], 'loan_tenure' => $row_service['loan_tenure'], 'fees_charges' => json_encode($row_service['fees_charges']), 'features' => json_encode($row_service['features']), 'eligibility' => json_encode($row_service['eligibility']), 'notify_bottom' => $row_service['notify_bottom'], 'status' => $row_service['status']
@@ -77,6 +80,7 @@ class AdminLoanserviceController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('app.loans.edit');
         $loan = LoanService::findOrFail($id);
         $loansRows = $loan->getServiceRows;
         return view('admin.loans.edit', compact('loan','loansRows'));
@@ -84,18 +88,18 @@ class AdminLoanserviceController extends Controller
 
     public function udpate( Request $request, $id)
     {
-        // dd($request->all());
+        Gate::authorize('app.loans.edit');
         $loan = LoanService::findOrfail($id);
         $header_image = $request->file('header_image');
         $old_image = $loan->header_image;
         if (isset($header_image)) {
             $currentDate = Carbon::now()->toDateString();
                 $headerimagename = $currentDate.uniqid().'.'.$header_image->getClientOriginalExtension();
-    
+
                 if (!Storage::disk('public')->exists('frontend/assets/img/loans')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/img/loans');
                 }
-                
+
                 if (Storage::disk('public')->exists('frontend/assets/img/loans/'.$old_image)) {
                     Storage::disk('public')->delete('frontend/assets/img/loans/'.$old_image);
                 }
@@ -112,25 +116,25 @@ class AdminLoanserviceController extends Controller
         $loan->disclaimer = strip_tags($request->disclaimer);
         $loan->status = $request->status;
         $loan->save();
-        
-        
+
+
         if (isset($request->service) && count($request->service) > 0) {
             foreach ($request->service as $row_service) {
                     // dd($row_service);
                     if (!empty($row_service['service_row_id'])) {
-                        
+
                         $loanServiceRow = LoanServiceRow::findOrfail($row_service['service_row_id']);
-                        
+
                         $old_row_image = $loanServiceRow->bank_logo;
                         if (isset($row_service['bank_logo'])) {
                             $bank_logo = $row_service['bank_logo'];
                             $currentDate = Carbon::now()->toDateString();
                             $banklogoname = $currentDate.uniqid().'.'.$bank_logo->getClientOriginalExtension();
-                
+
                             if (!Storage::disk('public')->exists('frontend/assets/img/loans')) {
                                 Storage::disk('public')->makeDirectory('frontend/assets/img/loans');
                             }
-                            
+
                             if (Storage::disk('public')->exists('frontend/assets/img/loans/'.$old_row_image)) {
                                 Storage::disk('public')->delete('frontend/assets/img/loans/'.$old_row_image);
                             }
@@ -148,20 +152,20 @@ class AdminLoanserviceController extends Controller
                         if (isset($bank_logo)) {
                                 $currentDate = Carbon::now()->toDateString();
                                 $banklogoname = $currentDate.uniqid().'.'.$bank_logo->getClientOriginalExtension();
-                    
+
                                 if (!Storage::disk('public')->exists('frontend/assets/img/loans')) {
                                     Storage::disk('public')->makeDirectory('frontend/assets/img/loans');
                                 }
                                 // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
                                 Storage::disk('public')->putFileAs('frontend/assets/img/loans/',$bank_logo,$banklogoname);
-                        
+
                         }
                         DB::table('loan_service_rows')->insert([
                             'loan_service_id' => $id,'bank_logo' => $banklogoname,'notify_top' => $row_service['notify_top'],'bank_name' => $row_service['bank_name'], 'ineterest_rate_range' => $row_service['ineterest_rate_range'], 'processing_fee' => $row_service['processing_fee'], 'loan_amount' => $row_service['loan_amount'], 'loan_tenure' => $row_service['loan_tenure'], 'fees_charges' => json_encode($row_service['fees_charges']), 'features' => json_encode($row_service['features']), 'eligibility' => json_encode($row_service['eligibility']), 'notify_bottom' => $row_service['notify_bottom'], 'status' => $row_service['status']
                         ]);
                     }
-                    
-                
+
+
             }
         }
         return redirect()->route('admin.loans.index');
@@ -169,6 +173,7 @@ class AdminLoanserviceController extends Controller
 
     public function destroy($id)
     {
+        Gate::authorize('app.loans.destroy');
         $loan = LoanService::findOrfail($id);
         $old_image = $loan->header_image;
         if (Storage::disk('public')->exists('frontend/assets/img/loans/'.$old_image)) {
@@ -180,17 +185,19 @@ class AdminLoanserviceController extends Controller
 
     public function docsIndex()
     {
+        Gate::authorize('app.loans.docs.index');
         $loanDocs = LoanServiceDoc::all();
         return view('admin.loans.docs.index',compact('loanDocs'));
     }
     public function docsCreate()
     {
+        Gate::authorize('app.loans.docs.create');
         $loans = LoanService::all();
         return view('admin.loans.docs.create', compact('loans'));
     }
     public function docsStore(Request $request)
     {
-        // return $request->all();
+        Gate::authorize('app.loans.docs.create');
         $docs = new LoanServiceDoc();
 
         $docs->loan_service_id = $request->loan_service_id;
@@ -204,12 +211,14 @@ class AdminLoanserviceController extends Controller
 
     public function docsEdit($id)
     {
+        Gate::authorize('app.loans.docs.edit');
         $loanDoc = LoanServiceDoc::findOrfail($id);
         $loans = LoanService::all();
         return view('admin.loans.docs.edit', compact('loanDoc','loans'));
     }
     public function docsUdpate(Request $request, $id)
     {
+        Gate::authorize('app.loans.docs.edit');
         $loanDoc = LoanServiceDoc::findOrfail($id);
 
         $loanDoc->loan_service_id = $request->loan_service_id;
@@ -223,6 +232,7 @@ class AdminLoanserviceController extends Controller
 
     public function docsDestroy($id)
     {
+        Gate::authorize('app.loans.docs.destroy');
         $cardDoc = LoanServiceDoc::findOrfail($id);
         $cardDoc->delete();
         return redirect()->back();
@@ -231,16 +241,19 @@ class AdminLoanserviceController extends Controller
     // faq card
     public function faqsIndex()
     {
+        Gate::authorize('app.loans.faq.index');
         $faqs = LoanServiceFaq::all();
         return view('admin.loans.faqs.index',compact('faqs'));
     }
-    
+
     public function faqsCreate(){
+        Gate::authorize('app.loans.faq.create');
         $loans = LoanService::all();
         return view('admin.loans.faqs.create',compact('loans'));
     }
 
     public function faqsStore(Request $request){
+        Gate::authorize('app.loans.faq.create');
         $loanServiceId = $request->loan_service_id;
         $faq = new LoanServiceFaq();
         $faq->loan_service_id = $loanServiceId;
@@ -252,6 +265,7 @@ class AdminLoanserviceController extends Controller
 
     public function faqsEdit($id)
     {
+        Gate::authorize('app.loans.faq.edit');
         $loanFaq = LoanServiceFaq::findOrfail($id);
         $loans = LoanService::all();
         return view('admin.loans.faqs.edit', compact('loanFaq','loans'));
@@ -259,6 +273,7 @@ class AdminLoanserviceController extends Controller
 
     public function faqsUdpate(Request $request, $id)
     {
+        Gate::authorize('app.loans.faq.edit');
         $laonFaq = LoanServiceFaq::findOrfail($id);
 
         $laonFaq->loan_service_id = $request->loan_service_id;
@@ -271,6 +286,7 @@ class AdminLoanserviceController extends Controller
 
     public function faqsDestroy($id)
     {
+        Gate::authorize('app.loans.faq.destroy');
         $laonFaq = LoanServiceFaq::findOrfail($id);
         $laonFaq->delete();
         return redirect()->back();

@@ -15,7 +15,7 @@ class ApplicationController extends Controller
     public function index()
     {
         // dd(Auth::user()->role->slug);
-        Gate::authorize('app.applications.index');
+        Gate::authorize('app.loan.applications.index');
         if (Auth::user()->role->slug == 'super-admin') {
             $applications = DB::table('loan_card_apply')->where('type','loan')->latest()->get();
         }else {
@@ -29,7 +29,7 @@ class ApplicationController extends Controller
     public function cardIndex()
     {
         // dd(Auth::user()->role->slug);
-        Gate::authorize('app.applications.index');
+        Gate::authorize('app.card.applications.index');
         if (Auth::user()->role->slug == 'super-admin') {
             $applications = DB::table('loan_card_apply')->where('type','card')->latest()->get();
         }else {
@@ -73,21 +73,21 @@ class ApplicationController extends Controller
 
     public function lifegeneralIndex()
     {
-        Gate::authorize('app.applications.index');
+        Gate::authorize('app.lg.applications.index');
         $applications = DB::table('life_general_form')->get();
         return view('admin.application.life-general.index', compact('applications'));
     }
 
     public function lifegeneralEdit($id)
     {
-        Gate::authorize('app.applications.edit');
+        Gate::authorize('app.lg.applications.edit');
         $application = DB::table('life_general_form')->where('id', $id)->first();
         return view('admin.application.life-general.edit', compact('application'));
     }
 
     public function lifegeneralUpdate(Request $request,$id)
     {
-        Gate::authorize('app.applications.edit');
+        Gate::authorize('app.lg.applications.edit');
         // return $request->all();
         $data = [
             'admin_note' => $request->admin_note,
@@ -99,21 +99,21 @@ class ApplicationController extends Controller
     }
 
     public function lifegeneralDestroy($id) {
-        Gate::authorize('app.applications.destroy');
+        Gate::authorize('app.lg.applications.destroy');
         DB::table('life_general_form')->where('id', '=', $id)->delete();
         return redirect()->back();
     }
 
     public function transportIndex()
     {
-        Gate::authorize('app.applications.index');
+        Gate::authorize('app.bc.applications.index');
         $applications = DB::table('bike_car_form')->get();
         return view('admin.application.bike_car.index', compact('applications'));
     }
 
     public function transportEdit($id)
     {
-        Gate::authorize('app.applications.edit');
+        Gate::authorize('app.bc.applications.edit');
         $application = DB::table('bike_car_form')->where('id', $id)->first();
         return view('admin.application.bike_car.edit', compact('application'));
     }
@@ -121,7 +121,7 @@ class ApplicationController extends Controller
     public function transportUpdate(Request $request,$id)
     {
         // return $request->all();
-        Gate::authorize('app.applications.edit');
+        Gate::authorize('app.bc.applications.edit');
         $data = [
             'admin_note' => $request->admin_note,
             'status' => $request->status
@@ -132,7 +132,7 @@ class ApplicationController extends Controller
     }
 
     public function transportDestroy($id) {
-        Gate::authorize('app.applications.destroy');
+        Gate::authorize('app.bc.applications.destroy');
         $old_file = DB::table('bike_car_form')->where('id', '=', $id)->select('file')->get();
         if (Storage::disk('public')->exists('frontend/assets/files/insurances/form/pdf/'.$old_file)) {
             Storage::disk('public')->delete('frontend/assets/files/insurances/form/pdf/'.$old_file);

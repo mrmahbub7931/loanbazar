@@ -18,7 +18,7 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        @role('super-admin')
+        {{-- @role('super-admin') --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -130,36 +130,47 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-home-smile"></i>
-                </div>
-                <div class="menu-title">Applications</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{route('admin.application.loan.index')}}">
-                        <div class="menu-title">Loan Application</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.application.card.index')}}">
-                        <div class="menu-title">Card Application</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.application.life.index')}}">
-                        <div class="menu-title">Life and General Application</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.application.transport.index')}}">
-                        <div class="menu-title">Bike and Motor Application</div>
-                    </a>
-                </li>
-            </ul>
 
-        </li>
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-home-smile"></i>
+                    </div>
+                    <div class="menu-title">Applications</div>
+                </a>
+                <ul>
+                    @can('app.loan.applications.index')
+                    <li>
+                        <a href="{{route('admin.application.loan.index')}}">
+                            <div class="menu-title">Loan Application</div>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('app.card.applications.index')
+                    <li>
+                        <a href="{{route('admin.application.card.index')}}">
+                            <div class="menu-title">Card Application</div>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('app.lg.applications.index')
+                    <li>
+                        <a href="{{route('admin.application.life.index')}}">
+                            <div class="menu-title">Life and General Application</div>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('app.bc.applications.index')
+                    <li>
+                        <a href="{{route('admin.application.transport.index')}}">
+                            <div class="menu-title">Bike and Motor Application</div>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+
+            </li>
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-home-smile"></i>
@@ -209,6 +220,7 @@
                 </li>
             </ul>
         </li>
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-shape-polygon"></i>
@@ -241,8 +253,8 @@
                 @csrf
             </form>
         </li>
-        @endrole
-        @role('vendor')
+        {{-- @endrole --}}
+        {{-- @role('vendor')
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-home-smile"></i>
@@ -260,7 +272,7 @@
                         <div class="menu-title">Card Application</div>
                     </a>
                 </li>
-                {{-- <li>
+                <li>
                     <a href="{{route('admin.application.life.index')}}">
                         <div class="menu-title">Life and General Application</div>
                     </a>
@@ -269,7 +281,7 @@
                     <a href="{{route('admin.application.transport.index')}}">
                         <div class="menu-title">Bike and Motor Application</div>
                     </a>
-                </li> --}}
+                </li>
             </ul>
 
         </li>
@@ -286,7 +298,7 @@
                 @csrf
             </form>
         </li>
-        @endrole
+        @endrole --}}
     </ul>
     <!--end navigation-->
 </div>

@@ -19,16 +19,13 @@ class FrontendController extends Controller
 
     public function storeApplyForm(Request $request)
     {
-        
+
         $this->validate($request, [
             'type'     => 'required',
             'full_name'     => 'required|string',
             'phone'     => 'required',
-            'email' => 'required|email',
             'present_address' => 'required',
             'profession' => 'required',
-            'existing_lc' => 'required',
-            'existing_etin' => 'required'
         ]);
         $tracking_id = mt_rand(111111,999999);
         $data = [
@@ -37,22 +34,22 @@ class FrontendController extends Controller
             'loan_name' => $request->loan_name,
             'card_name' => $request->card_name,
             'full_name' => $request->full_name,
-            'phone' => $request->phone, 
-            'date_of_birth' => $request->date_of_birth, 
-            'email' => $request->email, 
-            'present_address' => $request->present_address, 
-            'profession' => $request->profession, 
+            'phone' => $request->phone,
+            'date_of_birth' => $request->date_of_birth,
+            'email' => $request->email,
+            'present_address' => $request->present_address,
+            'profession' => $request->profession,
             'company_name' => $request->company_name,
             'designation' => $request->designation != null ? $request->designation : $request->s_designation,
-            'monthly_salary' => $request->monthly_salary, 
+            'monthly_salary' => $request->monthly_salary,
             'salary_paid_by' => $request->salary_paid_by,
-            'business_name' => $request->business_name, 
-            'business_type' => $request->business_type, 
-            'business_monthly_income' => $request->business_monthly_income, 
-            'house_type' => $request->house_type, 
-            'monthly_rental_income' => $request->monthly_rental_income, 
-            'existing_lc' => $request->existing_lc, 
-            'existing_etin' => $request->existing_etin, 
+            'business_name' => $request->business_name,
+            'business_type' => $request->business_type,
+            'business_monthly_income' => $request->business_monthly_income,
+            'house_type' => $request->house_type,
+            'monthly_rental_income' => $request->monthly_rental_income,
+            'existing_lc' => $request->existing_lc,
+            'existing_etin' => $request->existing_etin,
             'user_note' => $request->user_note ,
             'status' => 'Pending',
             'created_at' => Carbon::now()->toDateString()
@@ -122,15 +119,15 @@ class FrontendController extends Controller
                 if (!Storage::disk('public')->exists('frontend/assets/files/insurances/form/pdf')) {
                     Storage::disk('public')->makeDirectory('frontend/assets/files/insurances/form/pdf');
                 }
-    
+
                 Storage::disk('public')->putFileAs('frontend/assets/files/insurances/form/pdf',$file,$filename);
-    
+
                 // $insurance->pdf_file = $pdffilename;
                 DB::table('bike_car_form')->insert([
                     'insurance_type' => $request->insurance_type,'full_name' => $request->full_name,'email' => $request->email, 'phone' => $request->phone, 'receiving_address' => $request->receiving_address, 'insurance_date' => $request->insurance_date, 'file' => $filename
                 ]);
             }
-            
+
             return redirect()->back();
         }
     }

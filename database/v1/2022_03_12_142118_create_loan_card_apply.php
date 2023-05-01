@@ -23,11 +23,11 @@ class CreateLoanCardApply extends Migration
             $table->string('full_name');
             $table->string('phone');
             $table->string('date_of_birth')->nullable();
-            $table->string('email');
-            $table->string('present_address');
-            $table->string('profession');
-            $table->string('existing_lc');
-            $table->string('existing_etin');
+            $table->string('email')->nullable();
+            $table->string('present_address')->nullable();
+            $table->string('profession')->nullable();
+            $table->string('existing_lc')->nullable();
+            $table->string('existing_etin')->nullable();
             $table->string('user_note')->nullable();
             $table->string('vendor_note')->nullable();
             $table->string('author_note')->nullable();

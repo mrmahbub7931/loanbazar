@@ -6,23 +6,27 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
 
     public function index()
     {
+        Gate::authorize('app.categories.index');
         $categories = Category::latest()->get();
         return view('admin.category.index',compact('categories'));
     }
 
     public function create()
     {
+        Gate::authorize('app.categories.create');
         return view('admin.category.create');
     }
 
     public function store(Request $request)
     {
+        Gate::authorize('app.categories.create');
         $request->validate([
             'name' => 'required|max:255',
             'status' => 'required'
@@ -45,7 +49,7 @@ class CategoryController extends Controller
         $category = Category::findOrfail($id);
         return view('admin.category.edit',compact('category'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $data = [

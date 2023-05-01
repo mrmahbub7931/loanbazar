@@ -13,7 +13,7 @@ class LoanbazaarDbV1 extends Migration
      */
     public function up()
     {
-        // create modules table 
+        // create modules table
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
@@ -26,7 +26,7 @@ class LoanbazaarDbV1 extends Migration
             $table->foreignId('module_id')
                 ->constrained('modules')
                 ->onDelete('cascade');
-            $table->string('name');   
+            $table->string('name');
             $table->string('slug')->unique();
             $table->timestamps();
         });
@@ -70,7 +70,7 @@ class LoanbazaarDbV1 extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return voidclear
      */
     public function down()
     {

@@ -11,11 +11,12 @@ use App\Models\HomeImage;
 use App\Models\BestService;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use App\Models\CorporatePartners;
 use App\Models\FinancialPartners;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,18 +24,20 @@ class AdminHomePageController extends Controller
 {
     public function getSliderList()
     {
+        Gate::authorize('app.sliders.index');
         $sliders = Slider::all();
 
         return view('admin.slider.index', compact('sliders'));
     }
     public function createSliderForm()
     {
+        Gate::authorize('app.sliders.create');
         return view('admin.slider.create');
     }
 
     public function storeSlider(Request $request)
     {
-
+        Gate::authorize('app.sliders.create');
         $this->validate($request, [
             'title'     => 'required|string',
             'description'     => 'required',
@@ -70,12 +73,14 @@ class AdminHomePageController extends Controller
 
     public function editSliderForm($id)
     {
+        Gate::authorize('app.sliders.edit');
         $slider = Slider::findOrfail($id);
         return view('admin.slider.edit', compact('slider'));
     }
 
     public function updateSlider(Request $request, $id)
     {
+        Gate::authorize('app.sliders.edit');
         $slider = Slider::findOrfail($id);
 
         // dd($request->all());
@@ -110,14 +115,15 @@ class AdminHomePageController extends Controller
             $slider->status = false;
         }
 
-        
+
 
         $slider->update();
         return redirect()->route('admin.getslider');
-        
+
     }
 
     public function deleteSlider($id){
+        Gate::authorize('app.sliders.destroy');
         $slider = Slider::findOrfail($id);
         $slider->delete();
         return redirect()->back();
@@ -127,17 +133,20 @@ class AdminHomePageController extends Controller
 
     public function getDeals()
     {
+        Gate::authorize('app.deals.index');
         $deals = BestDeal::all();
         return view('admin.deals.index', compact('deals'));
     }
 
     public function createDeals()
     {
+        Gate::authorize('app.deals.create');
         return view('admin.deals.create');
     }
 
     public function storeDeals(Request $request)
     {
+        Gate::authorize('app.deals.create');
         $this->validate($request, [
             'title'     => 'required|string',
             'btn_txt'     => 'required',
@@ -162,8 +171,8 @@ class AdminHomePageController extends Controller
         $deals->title = $request->title;
 
 
-        
-        
+
+
         $deals->btn_txt = $request->btn_txt;
         $deals->btn_url = $request->btn_url;
         if ($request->status) {
@@ -183,6 +192,7 @@ class AdminHomePageController extends Controller
 
     public function editeDeals($id)
     {
+        Gate::authorize('app.deals.edit');
         $deal =BestDeal::findOrfail($id);
         $dealsBody = $deal->getDealsBody;
         return view('admin.deals.edit', compact('deal','dealsBody'));
@@ -190,8 +200,9 @@ class AdminHomePageController extends Controller
 
     public function updateDeals(Request $request, $id)
     {
+        Gate::authorize('app.deals.edit');
         $deal = BestDeal::findOrfail($id);
-        
+
         $deal_image = $request->file('deal_image');
         $old_image = $deal->img_src;
         if (isset($deal_image)) {
@@ -201,7 +212,7 @@ class AdminHomePageController extends Controller
             if (!Storage::disk('public')->exists('frontend/assets/img/deals')) {
                 Storage::disk('public')->makeDirectory('frontend/assets/img/deals');
             }
-            
+
             if (Storage::disk('public')->exists('frontend/assets/img/deals/'.$old_image)) {
                 Storage::disk('public')->delete('frontend/assets/img/deals/'.$old_image);
             }
@@ -211,7 +222,7 @@ class AdminHomePageController extends Controller
         }
 
         $deal->title = $request->title;
-        
+
         $deal->btn_txt = $request->btn_txt;
         $deal->btn_url = $request->btn_url;
         if ($request->status) {
@@ -231,6 +242,7 @@ class AdminHomePageController extends Controller
 
     public function deleteDeals($id)
     {
+        Gate::authorize('app.deals.destroy');
         $deal = BestDeal::findOrfail($id);
         $old_image = $deal->img_src;
         if (Storage::disk('public')->exists('frontend/assets/img/deals/'.$old_image)) {
@@ -244,17 +256,20 @@ class AdminHomePageController extends Controller
 
     public function getservices()
     {
+        Gate::authorize('app.services.index');
         $services = BestService::all();
         return view('admin.services.index', compact('services'));
     }
 
     public function createservices()
     {
+        Gate::authorize('app.services.create');
         return view('admin.services.create');
     }
 
     public function storeservices(Request $request)
     {
+        Gate::authorize('app.services.create');
         $this->validate($request, [
             'title'     => 'required|string',
             'url'       => 'required',
@@ -263,7 +278,7 @@ class AdminHomePageController extends Controller
             'icon_image' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
-        
+
         $icon_image = $request->file('icon_image');
 
         if (isset($icon_image)) {
@@ -275,7 +290,7 @@ class AdminHomePageController extends Controller
             }
             // $image = Image::make($slider_image)->resize(450, 500)->save($imagename,80);
             Storage::disk('public')->putFileAs('frontend/assets/img/services/',$icon_image,$imagename);
-            
+
         }
 
         $service = new BestService();
@@ -297,12 +312,14 @@ class AdminHomePageController extends Controller
 
     public function editeservices($id)
     {
+        Gate::authorize('app.services.edit');
         $service = BestService::findOrfail($id);
         return view('admin.services.edit', compact('service'));
     }
 
     public function updateservices(Request $request, $id)
     {
+        Gate::authorize('app.services.edit');
         // return $request->all();
         $service = BestService::findOrfail($id);
 
@@ -326,7 +343,7 @@ class AdminHomePageController extends Controller
             }
         }
 
-        
+
         $service->user_id = Auth::user()->id;
         $service->title = $request->title;
         $service->url = $request->url;
@@ -345,6 +362,7 @@ class AdminHomePageController extends Controller
 
     public function deleteservices($id)
     {
+        Gate::authorize('app.services.destroy');
         $service = BestService::findOrfail($id);
         $old_image = $service->service_cover_img;
         if (Storage::disk('public')->exists('frontend/assets/img/services/'.$old_image)) {
@@ -357,17 +375,20 @@ class AdminHomePageController extends Controller
     // Homepage large image method
     public function homeimgIndex()
     {
+        Gate::authorize('app.limage.index');
         $homeimages = HomeImage::all();
         return view('admin.homeimg.index',compact('homeimages'));
     }
 
     public function homeimgCreate()
     {
+        Gate::authorize('app.limage.create');
         return view('admin.homeimg.create');
     }
 
     public function homeimgStore(Request $request)
     {
+        Gate::authorize('app.limage.create');
         $this->validate($request, [
             'image_title'   => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg'
@@ -397,12 +418,14 @@ class AdminHomePageController extends Controller
 
     public function homeimgEdit($id)
     {
+        Gate::authorize('app.limage.edit');
         $image = HomeImage::findOrfail($id);
         return view('admin.homeimg.edit',compact('image'));
     }
 
     public function homeimgUpdate(Request $request,$id)
     {
+        Gate::authorize('app.limage.edit');
         $image = HomeImage::findOrfail($id);
         $old_image = $image->image;
 
@@ -415,7 +438,7 @@ class AdminHomePageController extends Controller
             if (!Storage::disk('public')->exists('frontend/assets/img/homeimg')) {
                 Storage::disk('public')->makeDirectory('frontend/assets/img/homeimg');
             }
-            
+
             if (Storage::disk('public')->exists('frontend/assets/img/homeimg/'.$old_image)) {
                 Storage::disk('public')->delete('frontend/assets/img/homeimg/'.$old_image);
             }
@@ -431,45 +454,49 @@ class AdminHomePageController extends Controller
 
     public function homeimgDelete($id)
     {
+        Gate::authorize('app.limage.destroy');
         $image = HomeImage::findOrfail($id);
         $old_image = $image->image;
         if (Storage::disk('public')->exists('frontend/assets/img/homeimg/'.$old_image)) {
             Storage::disk('public')->delete('frontend/assets/img/homeimg/'.$old_image);
         }
-        $image->delete(); 
+        $image->delete();
         return redirect()->back();
     }
 
-    // Countner 
+    // Countner
 
     /**
      * It returns the view of the counters index page.
      */
     public function countersIndex()
     {
+        Gate::authorize('app.counters.index');
         $counters = Counter::all();
         return view('admin.counters.index',compact('counters'));
     }
-    
+
     /**
      * > This function returns the view `admin.counters.create`
-     * 
+     *
      * @return A view
      */
     public function countersCreate()
     {
+        Gate::authorize('app.counters.create');
         return view('admin.counters.create');
     }
 
     /**
      * It validates the request, creates a new counter object, assigns the values from the request to
      * the object, and saves the object to the database
-     * 
+     *
      * @param Request request This is the request object that contains all the data that was submitted
      * from the form.
      */
     public function countersStore(Request $request)
     {
+        Gate::authorize('app.counters.create');
         $this->validate($request, [
             'title'                 => 'required|string',
             'card_disbursed'        => 'required',
@@ -490,11 +517,12 @@ class AdminHomePageController extends Controller
 
     /**
      * A function that is used to edit the counter.
-     * 
+     *
      * @param id The id of the counter you want to edit.
      */
     public function countersEdit($id)
     {
+        Gate::authorize('app.counters.edit');
         $counter = Counter::findOrfail($id);
         return view('admin.counters.edit',compact('counter'));
     }
@@ -502,13 +530,14 @@ class AdminHomePageController extends Controller
     /**
      * It takes the request from the form, finds the counter with the id, updates the counter with the
      * new data and redirects to the index page
-     * 
+     *
      * @param Request request This is the request object that contains the data that was submitted from
      * the form.
      * @param id The id of the counter you want to update.
      */
     public function countersUpdate(Request $request,$id)
     {
+        Gate::authorize('app.counters.edit');
         $counter = Counter::findOrfail($id);
         $counter->title = $request->title;
         $counter->user_id = Auth::user()->id;
@@ -522,40 +551,44 @@ class AdminHomePageController extends Controller
 
     /**
      * It finds the counter with the given id and deletes it
-     * 
+     *
      * @param id The id of the counter you want to delete.
      */
     public function countersDelete($id)
     {
+        Gate::authorize('app.counters.destroy');
         Counter::findOrfail($id)->delete();
         return redirect()->back();
     }
 
-    // Corporate partner method 
+    // Corporate partner method
 
     /**
      * It returns the view of the corporates index page.
-     * 
-     * @return A view called admin.corporates.index with the variable 
+     *
+     * @return A view called admin.corporates.index with the variable
      */
     public function corporatesIndex()
     {
+        Gate::authorize('app.corporates.index');
         $corporates = CorporatePartners::latest()->get();
         return view('admin.corporates.index',compact('corporates'));
     }
 
     /**
      * > This function returns the view `admin.corporates.create`
-     * 
+     *
      * @return A view called 'admin.corporates.create'
      */
     public function corporatesCreate()
     {
+        Gate::authorize('app.corporates.create');
         return view('admin.corporates.create');
     }
 
     public function corporatesStore(Request $request)
     {
+        Gate::authorize('app.corporates.create');
         $this->validate($request,[
             'name' => 'required|string',
             'corporate_logo' => 'image|mimes:jpeg,png,jpg,gif,svg'
@@ -583,13 +616,14 @@ class AdminHomePageController extends Controller
 
     public function corporatesEdit($id)
     {
+        Gate::authorize('app.corporates.edit');
         $corporate = CorporatePartners::findOrFail($id);
         return view('admin.corporates.edit',compact('corporate'));
     }
 
     public function corporatesUpdate(Request $request,$id)
     {
-
+        Gate::authorize('app.corporates.edit');
         $clogo = CorporatePartners::findOrfail($id);
         $old_image = $clogo->corporate_logo;
         $clogo->user_id = Auth()->user()->id;
@@ -617,6 +651,7 @@ class AdminHomePageController extends Controller
 
     public function corporatesDelete($id)
     {
+        Gate::authorize('app.corporates.destroy');
         $corporate = CorporatePartners::findOrfail($id);
         $old_image = $corporate->corporate_logo;
         if (Storage::disk('public')->exists('frontend/assets/img/corporates/'.$old_image)) {
@@ -629,22 +664,25 @@ class AdminHomePageController extends Controller
     // Financial Logo method
     public function financialIndex()
     {
+        Gate::authorize('app.financials.index');
         $financials = FinancialPartners::latest()->get();
         return view('admin.financials.index',compact('financials'));
     }
 
     /**
      * > This function returns the view `admin.corporates.create`
-     * 
+     *
      * @return A view called 'admin.corporates.create'
      */
     public function financialCreate()
     {
+        Gate::authorize('app.financials.create');
         return view('admin.financials.create');
     }
 
     public function financialStore(Request $request)
     {
+        Gate::authorize('app.financials.create');
         $this->validate($request,[
             'name' => 'required|string',
             'financial_logo' => 'image|mimes:jpeg,png,jpg,gif,svg'
@@ -672,13 +710,14 @@ class AdminHomePageController extends Controller
 
     public function financialEdit($id)
     {
+        Gate::authorize('app.financials.edit');
         $financial = FinancialPartners::findOrFail($id);
         return view('admin.financials.edit',compact('financial'));
     }
 
     public function financialUpdate(Request $request,$id)
     {
-
+        Gate::authorize('app.financials.edit');
         $flogo = FinancialPartners::findOrfail($id);
         $old_image = $flogo->financial_logo;
         $flogo->user_id = Auth()->user()->id;
@@ -706,6 +745,7 @@ class AdminHomePageController extends Controller
 
     public function financialDelete($id)
     {
+        Gate::authorize('app.financials.destroy');
         $financial = FinancialPartners::findOrfail($id);
         $old_image = $financial->financial_logo;
         if (Storage::disk('public')->exists('frontend/assets/img/financials/'.$old_image)) {

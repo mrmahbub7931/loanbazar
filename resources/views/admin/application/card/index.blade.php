@@ -34,12 +34,12 @@
                         <td>{{ $application->full_name }}</td>
                         {{-- <td>{{ $application->type }}</td> --}}
                         <td>@if(getVendorName($application->send_to_vendor) == null) <span class="btn btn-sm btn-warning radius-30 text-white">Not yet assign to any vendor</span>@endif{{ getVendorName($application->send_to_vendor) }}</td>
-                        <td>{{ date('F d, Y', strtotime($application->created_at)) }}</td>
+                        <td>{{ date('F d, Y / H:i:s', strtotime($application->created_at)) }}</td>
                         <td>{{ $application->phone }}</td>
-                        @if($application->status === 'Disbursed')
+                        @if($application->status === 'Eligible')
                             <td class="text-center">
                                 <span class="btn btn-sm btn-success radius-30 text-white">
-                                    Disbursed
+                                    Eligible
                                 </span>
                             </td>
                         @elseif($application->status === 'Not Eligible')
@@ -48,10 +48,40 @@
                                     Not Eligible
                                 </span>
                             </td>
+                        @elseif($application->status === 'Send to Bank')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Send to Bank
+                                </span>
+                            </td>
+                        @elseif($application->status === 'Documents on Processes')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Documents on Processes
+                                </span>
+                            </td>
                         @elseif($application->status === 'Documents Pending')
                             <td class="text-center">
                                 <span class="btn btn-sm btn-danger radius-30 text-white">
                                     Documents Pending
+                                </span>
+                            </td>
+                        @elseif($application->status === 'File Collect')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    File Collect
+                                </span>
+                            </td>
+                        @elseif($application->status === 'File Submitted')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    File Submitted
+                                </span>
+                            </td>
+                        @elseif($application->status === 'Send to Back Customers')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Send to Back Customers
                                 </span>
                             </td>
                         @elseif($application->status === 'Not Interested')
@@ -66,16 +96,52 @@
                                     Not Response
                                 </span>
                             </td>
-                        @elseif($application->status === 'Contacted')
+                        @elseif($application->status === 'Contacted File')
                             <td class="text-center">
-                                <span class="btn btn-sm btn-warning radius-30 text-white">
-                                    Contacted
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Contacted File
                                 </span>
                             </td>
-                        @elseif($application->status === 'Decline')
+                        @elseif($application->status === 'File Approved')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-success radius-30 text-white">
+                                    File Approved
+                                </span>
+                            </td>
+                        @elseif($application->status === 'File Disbursed')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-success radius-30 text-white">
+                                    File Disbursed
+                                </span>
+                            </td>
+                        @elseif($application->status === 'File Decline')
                             <td class="text-center">
                                 <span class="btn btn-sm btn-danger radius-30 text-white">
-                                    Decline
+                                    File Decline
+                                </span>
+                            </td>
+                        @elseif($application->status === 'CIB Bad')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-danger radius-30 text-white">
+                                    CIB Bad
+                                </span>
+                            </td>
+                        @elseif($application->status === 'Subspecies Client')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Subspecies Client
+                                </span>
+                            </td>
+                        @elseif($application->status === 'Need to Re-Contact')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Need to Re-Contact
+                                </span>
+                            </td>
+                        @elseif($application->status === 'Retailer Not Communicate')
+                            <td class="text-center">
+                                <span class="btn btn-sm btn-info radius-30 text-white">
+                                    Retailer Not Communicate
                                 </span>
                             </td>
                         @else
@@ -87,7 +153,14 @@
 
                         @endif
                         <td>
-							<button type="button" class="btn btn-info text-white btn-sm" data-bs-toggle="dropdown">	<i class="bx bx-dots-vertical-rounded"></i>
+                            <a href="{{ route('admin.application.edit', $application->id) }}" class="btn btn-sm btn-info text-white text-center"><i class='bx bx-edit-alt'></i></a>
+                            <a onclick="deleteApplication({{$application->id}})" href="javascript:;" class="btn btn-sm btn-danger text-white  text-center"><i class='bx bxs-trash-alt' ></i></a>
+                            <form action="{{ route('admin.application.destroy', $application->id) }}" method="post"
+                                style="display: none" id="delete-form-{{$application->id}}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+							{{-- <button type="button" class="btn btn-info text-white btn-sm" data-bs-toggle="dropdown">	<i class="bx bx-dots-vertical-rounded"></i>
 							</button>
 							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
                                 <a class="dropdown-item" href="{{ route('admin.application.edit', $application->id) }}">Edit</a>
@@ -97,7 +170,7 @@
                                     @csrf
                                     @method('DELETE')
                                 </form>
-							</div>
+							</div> --}}
                         </td>
                     </tr>
                     @endforeach

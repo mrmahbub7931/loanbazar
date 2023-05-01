@@ -16,19 +16,31 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
         User::updateOrCreate([
-            'role_id'   => Role::where('slug','super-admin')->first()->id,
-            'name'      => 'Admin',
             'email' => 'admin@admin.com',
             'phone' => '01234567810',
+        ],[
+            'role_id'   => Role::where('slug','super-admin')->first()->id,
+            'name'      => 'Admin',
             'password' => Hash::make('secret12')
         ]);
 
         User::updateOrCreate([
-            'role_id'   => Role::where('slug','user')->first()->id,
-            'name'      => 'User',
             'email' => 'user@gmail.com',
             'phone' => '01234567811',
+        ],[
+            'role_id'   => Role::where('slug','user')->first()->id,
+            'name'      => 'User',
+            'password' => Hash::make('secret12')
+        ]);
+
+        User::updateOrCreate([
+            'email' => 'vendor@vendor.com',
+            'phone' => '01234567812',
+        ],[
+            'role_id'   => Role::where('slug','vendor')->first()->id,
+            'name'      => 'Vendor',
             'password' => Hash::make('secret12')
         ]);
     }

@@ -24,142 +24,178 @@
                 <div class="card-title d-flex align-items-center">
                     <div><i class="bx bx-outline me-1 me-1 font-22 text-primary"></i>
                     </div>
-                    <h5 class="mb-0 text-primary">Update Form</h5>
+                    <h5 class="mb-0 text-black">{{ $application->type == 'card' ? 'Credit Card' : 'Loan' }} Application From {{ $application->full_name }} </h5>
                 </div>
                 <hr>
                 <form class="row g-3" action="{{ route('admin.application.update', $application->id) }}" enctype="multipart/form-data" id="applicationForm" method="post">
                     @csrf
                     @method('PUT')
-                    <div class="col-md-4 col-12">
-                        <label for="full_name" class="form-label">Full name</label>
-                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{ $application->full_name }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="phone" class="form-label">Phone number</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $application->phone }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="email" class="form-label">Email </label>
-                        <input type="text" class="form-control" id="email" name="email" value="{{ $application->email }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="date_of_birth" class="form-label">Date of Birth </label>
-                        <input type="text" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ $application->date_of_birth }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="profession" class="form-label">Profession </label>
-                        <input type="text" class="form-control" id="profession" name="profession" value="{{ $application->profession }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="present_address" class="form-label">Present Address</label>
-                        <input type="text" class="form-control" id="present_address" name="present_address" value="{{ $application->present_address }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="tracking_id" class="form-label">Tracking ID</label>
-                        <input type="text" class="form-control" id="tracking_id" name="tracking_id" value="{{ $application->tracking_id }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="type" class="form-label">Application Type</label>
-                        <input type="text" class="form-control" id="type" name="type" value="{{ $application->type == 'card' ? 'Credit Card' : 'Loan' }}" readonly>
-                    </div>
-                    @if ($application->card_name !== null)
-                        <div class="col-md-4 col-12">
-                            <label for="card_name" class="form-label">Card Name</label>
-                            <input type="text" class="form-control" id="card_name" name="card_name" value="{{ $application->card_name }}" readonly>
-                        </div>
-                    @endif
-                    @if ($application->loan_name !== null)
-                        <div class="col-md-4 col-12">
-                            <label for="loan_name" class="form-label">Loan Name</label>
-                            <input type="text" class="form-control" id="loan_name" name="loan_name" value="{{ $application->loan_name }}" readonly>
-                        </div>
-                    @endif
-                    <div class="col-md-4 col-12">
-                        <label for="existing_lc" class="form-label">Existing Loan</label>
-                        <input type="text" class="form-control" id="existing_lc" name="existing_lc" value="{{ $application->existing_lc ? "Yes" : "No" }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="existing_etin" class="form-label">Existing E-TIN</label>
-                        <input type="text" class="form-control" id="existing_etin" name="existing_etin" value="{{ $application->existing_etin ? "Yes" : "No" }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="company_name" class="form-label">Company Name</label>
-                        <input type="text" class="form-control" id="company_name" name="company_name" value="{{ $application->company_name }}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="designation" class="form-label">Designation</label>
-                        <input type="text" class="form-control" id="designation" name="designation" value="{{ $application->designation}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="monthly_salary" class="form-label">Monthly Salary</label>
-                        <input type="text" class="form-control" id="monthly_salary" name="monthly_salary" value="{{ $application->monthly_salary}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="salary_paid_by" class="form-label">Salary Paid By:</label>
-                        <input type="text" class="form-control" id="salary_paid_by" name="salary_paid_by" value="{{ $application->salary_paid_by}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="business_name" class="form-label">Business Name:</label>
-                        <input type="text" class="form-control" id="business_name" name="business_name" value="{{ $application->business_name}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="business_type" class="form-label">Business Type:</label>
-                        <input type="text" class="form-control" id="business_type" name="business_type" value="{{ $application->business_type}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="business_monthly_income" class="form-label">Business Monthly Income:</label>
-                        <input type="text" class="form-control" id="business_monthly_income" name="business_monthly_income" value="{{ $application->business_monthly_income}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="house_type" class="form-label">House Type:</label>
-                        <input type="text" class="form-control" id="house_type" name="house_type" value="{{ $application->house_type}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="monthly_rental_income" class="form-label">Monthly Rental Income:</label>
-                        <input type="text" class="form-control" id="monthly_rental_income" name="monthly_rental_income" value="{{ $application->monthly_rental_income}}" readonly>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label for="tracking_id" class="form-label">Monthly Rental Income:</label>
-                        <input type="text" class="form-control" id="tracking_id" name="tracking_id" value="{{ $application->tracking_id}}" readonly>
-                    </div>
-                    <div class="col-12">
-                        <label for="user_note">Client message / Special note!</label>
-                        <input type="text" class="form-control" id="user_note" placeholder="Enter your special note" name="user_note" value="{{ $application->user_note }}" readonly>
-                    </div>
-                    <div class="col-12">
-                        <label for="author_note">Author message / Any Special note!</label>
-                        <input type="text" class="form-control" id="author_note" placeholder="Enter your special note" name="author_note" value="{{ $application->author_note }}">
-                    </div>
-                    {{-- @role('vendor') --}}
-                    <div class="col-12">
-                        <label for="vendor_note">Vendor message / Any Special note!</label>
-                        <input type="text" class="form-control" id="vendor_note" placeholder="Enter your special note" name="vendor_note" value="{{ $application->vendor_note }}" @role('super-admin') readonly @endrole>
-                    </div>
-                    {{-- @endrole --}}
-                    <div class="col-md-4 col-12">
-                        <label class="form-label">Status</label>
-						<select class="form-control" name="status" id="status">
-                            <option value="">Select Status</option>
-                            <option value="Disbursed" {{$application->status == 'Disbursed' ? 'selected' : ''}}>Disbursed</option>
-                            <option value="Documents Pending" {{$application->status == 'Documents Pending' ? 'selected' : ''}}>Documents Pending</option>
-                            <option value="Not Interested" {{$application->status == 'Not Interested' ? 'selected' : ''}}>Not Interested</option>
-                            <option value="Not Response" {{$application->status == 'Not Response' ? 'selected' : ''}}>Not Response</option>
-                            <option value="Contacted" {{$application->status == 'Contacted' ? 'selected' : ''}}>Contacted</option>
-                            <option value="Not Eligible" {{$application->status == 'Not Eligible' ? 'selected' : ''}}>Not Eligible</option>
-                            <option value="Decline" {{$application->status == 'Decline' ? 'selected' : ''}}>Decline</option>
-                        </select>
-                    </div>
-                    @role('super-admin')
-                    <div class="col-md-4 col-12">
-                        <label class="form-label">Send to vendor</label>
-						<select class="form-control" name="send_to_vendor" id="send_to_vendor">
-                            <option value="">Select Vendor</option>
-                            @foreach ($vendors as $vendor)
-                                <option value="{{$vendor->id}}" {{$vendor->id == $application->send_to_vendor ? 'selected' : ''}}>{{$vendor->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @endrole
+                <table class="table table-bordered">
+                    <tbody>
+                        @isset($application->full_name)
+                            <tr>
+                                <td>Full Name</td>
+                                <td>{{ $application->full_name }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->phone)
+                            <tr>
+                                <td>Phone Number</td>
+                                <td>{{ $application->phone }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->email)
+                            <tr>
+                                <td>Email Address</td>
+                                <td>{{ $application->email }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->date_of_birth)
+                            <tr>
+                                <td>DOB</td>
+                                <td>{{ $application->date_of_birth }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->present_address)
+                            <tr>
+                                <td>Present Address</td>
+                                <td>{{ $application->present_address }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->type)
+                            <tr>
+                                <td>Application Type</td>
+                                <td>{{ $application->type == 'card' ? 'Credit Card' : 'Loan' }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->profession)
+                            <tr>
+                                <td>Profession</td>
+                                <td>{!! str_replace('_',' ',ucwords($application->profession)) !!}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->company_name)
+                            <tr>
+                                <td>Company Name</td>
+                                <td>{{ $application->company_name }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->designation)
+                            <tr>
+                                <td>Designation</td>
+                                <td>{{ $application->designation }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->monthly_salary)
+                            <tr>
+                                <td>Monthly Salary</td>
+                                <td>{{ $application->monthly_salary }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->salary_paid_by)
+                            <tr>
+                                <td>Salary Paid By</td>
+                                <td>{{ $application->salary_paid_by }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->business_name)
+                            <tr>
+                                <td>Business Name</td>
+                                <td>{{ $application->business_name }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->business_type)
+                            <tr>
+                                <td>Business Type</td>
+                                <td>{{ $application->business_type }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->business_monthly_income)
+                            <tr>
+                                <td>Monthly income or Bank Txn</td>
+                                <td>{{ $application->business_monthly_income }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->house_type)
+                            <tr>
+                                <td>House Type</td>
+                                <td>{{ $application->house_type }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->existing_lc)
+                            <tr>
+                                <td>Existing Loan or Credit Card</td>
+                                <td>{{ $application->existing_lc }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->existing_etin)
+                            <tr>
+                                <td>Existing E -TIN</td>
+                                <td>{{ $application->existing_etin }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->tracking_id)
+                            <tr>
+                                <td>Tracking ID</td>
+                                <td>{{ $application->tracking_id }}</td>
+                            </tr>
+                        @endisset
+                        @isset($application->user_note)
+                            <tr>
+                                <td>Client message / Special note!</td>
+                                <td>{{ $application->user_note }}</td>
+                            </tr>
+                        @endisset
+                        <tr>
+                            <td>Author message / Any Special note!</td>
+                            <td><input type="text" class="form-control" id="author_note" placeholder="Enter your special note" name="author_note" value="{{ $application->author_note }}"></td>
+                        </tr>
+                        <tr>
+                            <td>Vendor message / Any Special note!</td>
+                            <td><input type="text" class="form-control" id="vendor_note" placeholder="Enter your special note" name="vendor_note" value="{{ $application->vendor_note }}" @role('super-admin') readonly @endrole></td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                <select class="form-control" name="status" id="status">
+                                    <option value="">Select Status</option>
+                                    <option value="Eligible" {{$application->status == 'Eligible' ? 'selected' : ''}}>Eligible</option>
+                                    <option value="Not Eligible" {{$application->status == 'Not Eligible' ? 'selected' : ''}}>Not Eligible</option>
+                                    <option value="Send to Bank" {{$application->status == 'Send to Bank' ? 'selected' : ''}}>Send to Bank</option>
+                                    <option value="Documents on Processes" {{$application->status == 'Documents on Processes' ? 'selected' : ''}}>Documents on Processes</option>
+                                    <option value="Documents Pending" {{$application->status == 'Documents Pending' ? 'selected' : ''}}>Documents Pending</option>
+                                    <option value="File Collect" {{$application->status == 'File Collect' ? 'selected' : ''}}>File Collect</option>
+                                    <option value="File Submitted" {{$application->status == 'File Submitted' ? 'selected' : ''}}>File Submitted</option>
+                                    <option value="Send to Back Customers" {{$application->status == 'Send to Back Customers' ? 'selected' : ''}}>Send to Back Customers</option>
+                                    <option value="Not Interested" {{$application->status == 'Not Interested' ? 'selected' : ''}}>Not Interested</option>
+                                    <option value="Not Response" {{$application->status == 'Not Response' ? 'selected' : ''}}>Not Response</option>
+                                    <option value="Contacted File" {{$application->status == 'Contacted File' ? 'selected' : ''}}>Contacted File</option>
+                                    <option value="File Approved" {{$application->status == 'File Approved' ? 'selected' : ''}}>File Approved</option>
+                                    <option value="File Disbursed" {{$application->status == 'File Disbursed' ? 'selected' : ''}}>File Disbursed</option>
+                                    <option value="File Decline" {{$application->status == 'File Decline' ? 'selected' : ''}}>File Decline</option>
+                                    <option value="CIB Bad" {{$application->status == 'CIB Bad' ? 'selected' : ''}}>CIB Bad</option>
+                                    <option value="Subspecies Client" {{$application->status == 'Subspecies Client' ? 'selected' : ''}}>Subspecies Client</option>
+                                    <option value="Need to Re-Contact " {{$application->status == 'Need to Re-Contact ' ? 'selected' : ''}}>Need to Re-Contact </option>
+                                    <option value="Retailer Not Communicate" {{$application->status == 'Retailer Not Communicate' ? 'selected' : ''}}>Retailer Not Communicate</option>
+                                </select>
+                            </td>
+                        </tr>
+                        @role('super-admin')
+                        <tr>
+                            <td>Send to vendor</td>
+                            <td>
+                                <select class="form-control" name="send_to_vendor" id="send_to_vendor">
+                                    <option value="">Select Vendor</option>
+                                    @foreach ($vendors as $vendor)
+                                        <option value="{{$vendor->id}}" {{$vendor->id == $application->send_to_vendor ? 'selected' : ''}}>{{$vendor->name}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        @endrole
+                    </tbody>
+                  </table>
+                  {{-- end form --}}
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary px-5">Update</button>
